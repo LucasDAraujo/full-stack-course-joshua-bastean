@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dropdown and radio buttons</title>
+</head>
+
+<body>
+    <!-- action = The URI of a program that processes the form information, where it goes. -->
+    <!-- method = The HTTP method that the browser uses to submit the form. -->
+    <form action="" method="get">
+        <label for="username">Login name:</label>
+        <input id="username" type="text" placeholder="Username" name="username" required autofocus/>
+        <br />
+        <br />
+        <label for="password">Your password:</label>
+        <input id="password" type="password" placeholder="Password" name="password" required />
+        <br>
+        <br>
+        <p>Favorite drink</p>
+        <label for="pepsi">Pepsi</label>
+        <input id="pepsi" type="radio" name="drink" value="">
+        <label for="coke">Coke</label>
+        <input id="coke" type="radio" name="drink" value="">
+        <br>
+        <br>
+        <label for="feeling">How are you feeling?</label>
+        <select name="feeling" id="month">
+            <option value="happy">:-)</option>
+            <option value="neutral">:-I</option>
+            <option value="sad">:-(</option>
+        </select>
+        <br>
+        <br>
+        <button>Submit</button>
+    </form>
+</body>
+
+</html>
