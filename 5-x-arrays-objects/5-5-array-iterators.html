@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Array Iterators</title>
+        <script>
+            let array1 = [1, 2, 3, 4];
+            array1.forEach((number) => {
+                console.log(number);
+            });
+
+            let x = array1.map((num) => {
+                return num * 3;
+            });
+
+            let numberNerd = array1.map((num) => {
+                return `I love the number ${num}`;
+            });
+
+            console.log('numberNerd: ', numberNerd);
+        </script>
+    </head>
+    <body></body>
+</html>

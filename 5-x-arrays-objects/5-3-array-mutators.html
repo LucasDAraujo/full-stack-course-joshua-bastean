@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Array mutators</title>
+        <script>
+            let dogs = ["Max", "Sam", "Lilah"];
+            let x = dogs.pop(); // Remove the last item and returns it
+
+            dogs.push("Lilah"); // put an item on the last index of the array
+            console.log("dogs: ", dogs);
+
+            dogs.shift(); //Remove the first item and returns it
+            dogs.unshift("max"); //add an item on the first index of the array
+
+            //Delete starting on a specified index and deletes a specified quantity and returns it
+            let dogs2 = ["Lul", "kekw", "lmao"];
+            console.log("dogs2: ", dogs2);
+            z = dogs2.splice(0, 1);
+            console.log("z: ", z);
+            console.log("dogs2: ", dogs2);
+
+            //Splice can also be used to add items
+            dogs3 = ["a", "b", "c"];
+            x = dogs3.splice(dogs3.length, 0, "d",'June','Marry');
+            console.log("dogs3: ", dogs3);
+            console.log("x: ", x);
+        </script>
+    </head>
+    <body></body>
+</html>
