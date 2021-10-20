@@ -1,19 +1,26 @@
 body {
     background-color: black;
 }
+
 h1 {
     color: white;
 }
+
 .square {
     border-radius: 20px;
     width: 30%;
     padding-bottom: 30%;
     margin: 1.66%;
 }
-h1,
+
+.selected {
+    background-color: blue;
+}
+
 .square {
     transition: 0.7s;
 }
+
 #container {
     margin: 0 auto;
     max-width: 600px;
@@ -22,6 +29,6 @@ h1,
     flex-direction: row;
 }
 
-#messageContainer {
+#stripe {
     background-color: white;
 }
