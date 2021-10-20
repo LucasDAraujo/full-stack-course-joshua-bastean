@@ -9,9 +9,11 @@ h1 {
     width: 30%;
     padding-bottom: 30%;
     margin: 1.66%;
+}
+h1,
+.square {
     transition: 0.7s;
 }
-
 #container {
     margin: 0 auto;
     max-width: 600px;

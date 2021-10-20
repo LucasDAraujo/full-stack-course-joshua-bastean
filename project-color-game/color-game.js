@@ -1,29 +1,32 @@
-
-
-/* -------------------------------- constants declarations -------------------------------- */
-const colors = [
-    "rgb(255, 0, 0)",
-    "rgb(0, 255, 0)",
-    "rgb(0, 0, 255)",
-    "rgb(255, 255, 0)",
-    "rgb(255, 0, 255)",
-    "rgb(0, 255, 255)",
-];
-
-/* --------------------------- elements selection --------------------------- */
-const squares = document.querySelectorAll(".square");
-const colorDisplay = document.getElementById("colorDisplay");
-const message = document.getElementById("message");
-
 /* ------------------------- Helper functions ------------------------ */
 const pickColor = () => {
     const random = Math.floor(Math.random() * colors.length);
     return colors[random];
 };
 
+const generateRandomColor = () => {
+    const randomColor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(
+        Math.random() * 256
+    )}, ${Math.floor(Math.random() * 256)})`;
+    return randomColor;
+};
+
+const generateRandomColors = (num) => {
+    let arrayColors = [];
+    for (let i = 0; i < num; i++) {
+        arrayColors.push(generateRandomColor());
+    }
+    return arrayColors;
+};
+colors = generateRandomColors(6)
+/* --------------------------- elements selection --------------------------- */
+const squares = document.querySelectorAll(".square");
+const colorDisplay = document.getElementById("colorDisplay");
+const message = document.getElementById("message");
+const title = document.querySelector('h1')
+
 /* -------------------------- choose winning color -------------------------- */
-//Math.ceil(Math.random() * 6)
-let pickedColor = pickColor()
+let pickedColor = pickColor();
 
 //Update colorDisplay
 colorDisplay.textContent = pickedColor;
@@ -40,6 +43,7 @@ for (let i = 0; i < squares.length; i++) {
         if (clickedColor === pickedColor) {
             message.textContent = "Correct 😄";
             changeColors(clickedColor);
+            title.style.backgroundColor = clickedColor
         } else {
             this.style.backgroundColor = "#000";
             message.textContent = "You suck! 😝";
