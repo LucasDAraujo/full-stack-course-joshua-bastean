@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Film database</title>
+        <script>
+            const movies = [
+                {
+                    title: "Click",
+                    hasSeen: false,
+                    stars: null,
+                },
+                {
+                    title: "Shrek",
+                    hasSeen: true,
+                    stars: 5,
+                },
+                {
+                    title: "Fury",
+                    hasSeen: false,
+                    stars: null,
+                },
+                {
+                    title: "Titanic",
+                    hasSeen: true,
+                    stars: 3,
+                },
+            ];
+            movies.forEach((movie) => {
+                movie.hasSeen
+                    ? console.log(
+                          `you have seen ${movie.title} and gave it ${movie.stars} stars`
+                      )
+                    : console.log(`You haven't seen ${movie.title} yet`);
+            });
+        </script>
+    </head>
+    <body></body>
+</html>
