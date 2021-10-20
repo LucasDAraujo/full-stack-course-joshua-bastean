@@ -1,3 +1,5 @@
+
+
 /* -------------------------------- constants declarations -------------------------------- */
 const colors = [
     "rgb(255, 0, 0)",
@@ -11,10 +13,17 @@ const colors = [
 /* --------------------------- elements selection --------------------------- */
 const squares = document.querySelectorAll(".square");
 const colorDisplay = document.getElementById("colorDisplay");
+const message = document.getElementById("message");
+
+/* ------------------------- Helper functions ------------------------ */
+const pickColor = () => {
+    const random = Math.floor(Math.random() * colors.length);
+    return colors[random];
+};
 
 /* -------------------------- choose winning color -------------------------- */
 //Math.ceil(Math.random() * 6)
-let pickedColor = colors[3];
+let pickedColor = pickColor()
 
 //Update colorDisplay
 colorDisplay.textContent = pickedColor;
@@ -27,12 +36,20 @@ for (let i = 0; i < squares.length; i++) {
     squares[i].addEventListener("click", function () {
         //Get the color of the clicked square
         const clickedColor = this.style.backgroundColor;
-
         //Compare that color to picked color
         if (clickedColor === pickedColor) {
-            alert("You're right");
+            message.textContent = "Correct 😄";
+            changeColors(clickedColor);
         } else {
-            alert("You suck");
+            this.style.backgroundColor = "#000";
+            message.textContent = "You suck! 😝";
         }
     });
 }
+
+/* ------------------------ Change the squares colors ----------------------- */
+const changeColors = (color) => {
+    squares.forEach((square) => {
+        square.style.backgroundColor = color;
+    });
+};

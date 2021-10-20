@@ -4,6 +4,14 @@ body {
 h1 {
     color: white;
 }
+.square {
+    border-radius: 20px;
+    width: 30%;
+    padding-bottom: 30%;
+    margin: 1.66%;
+    transition: 0.7s;
+}
+
 #container {
     margin: 0 auto;
     max-width: 600px;
@@ -11,10 +19,7 @@ h1 {
     flex-wrap: wrap;
     flex-direction: row;
 }
-.square {
-    border-radius: 20px;
-    width: 30%;
-    background-color: purple;
-    padding-bottom: 30%;
-    margin: 1.66%;
+
+#messageContainer {
+    background-color: white;
 }
