@@ -1,0 +1,20 @@
+body {
+    background-color: black;
+}
+h1 {
+    color: white;
+}
+#container {
+    margin: 0 auto;
+    max-width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.square {
+    border-radius: 20px;
+    width: 30%;
+    background-color: purple;
+    padding-bottom: 30%;
+    margin: 1.66%;
+}
