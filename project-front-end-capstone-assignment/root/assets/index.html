@@ -7,6 +7,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rampart+One&display=swap" rel="stylesheet">
+
+
     <!-- Bootstrap CSS v5.0.2 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
@@ -17,29 +23,47 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- My CSS -->
-    <link rel="stylesheet" href="css/index.css">
-
+    <link rel="stylesheet" href="css/index.css" />
 </head>
 
 <body class="bg-secondary">
-    <div  class="container-fluid bg-info m-auto rounded-3 ">
+    <div class="container-fluid bg-info m-auto rounded-3 mt-md-3 pt-3">
         <div class="mb-3">
             <div class="
+                        m-md-3
                         d-flex
                         align-items-center
                         justify-content-between
                         mb-2
                     ">
-                <label for="task" class="display-6 form-label">Todo List</label>
+                <label for="task" class="display-6 fw-bolder form-label"> Todo List</label>
 
-                <button id="addTask" type="button" class="btn btn-dark">
+                <button id="addTask" type="submit" class="btn btn-dark">
                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
                 </button>
             </div>
-            <input id="task" type="text" class="form-control mb-5" name="task"  placeholder="Insert yor new task here" />
+            <input disabled type="text" class="form-control mb-5" name="task" placeholder="Insert yor new task here" />
             <small id="helpId" class="form-text text-muted"></small>
         </div>
+
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th>Tasks</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+
+                </tr>
+            </tbody>
+        </table>
+
     </div>
+
+    <!-- Meu script -->
+    <script src="js/index.js"></script>
 </body>
 
 </html>
