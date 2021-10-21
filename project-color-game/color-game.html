@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- ROBOTO FONT -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+            rel="stylesheet"
+        />
+
         <!-- NORMALIZE CSS -->
         <link
             rel="stylesheet"
@@ -16,21 +24,26 @@
         <title>Color Game</title>
     </head>
     <body>
-        <h1>My awesome <span id="colorDisplay">RGB</span> Color Game</h1>
-        <div id="stripe">
-            <button id="resetButton">New colors</button>
-            <span id="message"></span>
-            <button id="easyButton">Easy</button>
-            <button id="hardButton" class="selected">Hard</button>
-        </div>
-        <div id="container">
+        <header>
+            <h1>
+                My awesome <br /><span id="colorDisplay">RGB</span><br />
+                Color Game
+            </h1>
+            <div id="stripe">
+                <button id="resetButton">New colors</button>
+                <span id="message"></span>
+                <button class="mode">Easy</button>
+                <button  class="mode selected">Hard</button>
+            </div>
+        </header>
+        <section>
             <div class="square"></div>
             <div class="square"></div>
             <div class="square"></div>
             <div class="square"></div>
             <div class="square"></div>
             <div class="square"></div>
-        </div>
+        </section>
 
         <!-- JAVASCRIPT -->
         <script src="color-game.js"></script>

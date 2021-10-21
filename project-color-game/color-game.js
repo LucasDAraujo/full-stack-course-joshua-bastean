@@ -1,42 +1,7 @@
 /* -------------------------------------------------------------------------- */
-/*                              Helper functions                              */
+/*                     //ANCHOR Helper functions                              */
 /* -------------------------------------------------------------------------- */
 
-//ANCHOR Chance buttons class
-function changeButtonClass(buttonType, selectedButton, inverseButton) {
-    if (buttonType === "easy") {
-        numSquares = 3;
-    } else {
-        numSquares = 6;
-    }
-    colors = generateRandomColors(numSquares);
-
-    selectedButton.classList.add("selected");
-
-    inverseButton.classList.remove("selected");
-
-    colors = generateRandomColors(numSquares);
-
-    pickedColor = pickColor();
-
-    colorDisplay.textContent = pickedColor;
-    if (buttonType === "easy") {
-        //update colors on easy
-        for (let i = 0; i < squares.length; i++) {
-            if (colors[i]) {
-                squares[i].style.backgroundColor = colors[i];
-            } else {
-                squares[i].style.display = "none";
-            }
-        }
-    } else {
-        for (let i = 0; i < squares.length; i++) {
-            squares[i].style.backgroundColor = colors[i];
-            squares[i].style.display = 'block';
-
-        }
-    }
-}
 //Change the squares colors
 const changeColors = (color) => {
     squares.forEach((square) => {
@@ -44,13 +9,13 @@ const changeColors = (color) => {
     });
 };
 
-//Pick a random color on the array
+//Pick a random color on the array for being the "you win" color
 const pickColor = () => {
     const random = Math.floor(Math.random() * colors.length);
     return colors[random];
 };
 
-//Generate a random rgb value
+//Generate a random string "rgb(XXX, XXX, XXX)" value
 const generateRandomColor = () => {
     const randomColor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(
         Math.random() * 256
@@ -65,6 +30,39 @@ const generateRandomColors = (num) => {
         arrayColors.push(generateRandomColor());
     }
     return arrayColors;
+};
+
+/* ----------------------- //ANCHOR reset squares ---------------------- */
+const resetSquares = () => {
+    const difficultyButton = document.querySelector(".selected").textContent;
+
+    colors = generateRandomColors(numSquares);
+
+    pickedColor = pickColor();
+
+    resetButton.textContent = "New Colors";
+
+    colorDisplay.textContent = pickedColor;
+
+    title.style.backgroundColor = "steelblue";
+
+    message.textContent = "";
+
+    if (difficultyButton === "Easy") {
+        //update colors on easy
+        for (let i = 0; i < squares.length; i++) {
+            if (colors[i]) {
+                squares[i].style.backgroundColor = colors[i];
+            } else {
+                squares[i].style.display = "none";
+            }
+        }
+    } else {
+        for (let i = 0; i < squares.length; i++) {
+            squares[i].style.backgroundColor = colors[i];
+            squares[i].style.display = "block";
+        }
+    }
 };
 
 /* -------------------------------------------------------------------------- */
@@ -90,8 +88,7 @@ const title = document.querySelector("h1");
 const resetButton = document.getElementById("resetButton");
 
 //Picks the 2 buttons of difficulty
-const easyButton = document.getElementById("easyButton");
-const hardButton = document.getElementById("hardButton");
+const modeButtons = document.querySelectorAll(".mode");
 
 /* -------------------------------------------------------------------------- */
 /*  //ANCHOR                          MAIN                                    */
@@ -107,28 +104,21 @@ let pickedColor = pickColor();
 colorDisplay.textContent = pickedColor;
 
 /* ------------------------------ reset colors button ------------------------------ */
-resetButton.addEventListener("click", function () {
-    colors = generateRandomColors(numSquares);
+resetButton.addEventListener("click", resetSquares);
 
-    pickedColor = pickColor();
-
-    colorDisplay.textContent = pickedColor;
-
-    title.style.backgroundColor = "black";
-
-    for (let i = 0; i < squares.length; i++) {
-        squares[i].style.backgroundColor = colors[i];
-    }
-});
-
-/* ------------------------------- ANCHOR easy button ------------------------------ */
-easyButton.addEventListener("click", function () {
-    changeButtonClass("easy", this, hardButton);
-});
-
-/* ------------------------------- hard button ------------------------------ */
-hardButton.addEventListener("click", function () {
-    changeButtonClass("hard", this, easyButton);
+/* ------------------------------ Mode buttons ------------------------------ */
+modeButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+        modeButtons[0].classList.remove("selected");
+        modeButtons[1].classList.remove("selected");
+        this.classList.add("selected");
+        if (this.textContent === "Easy") {
+            numSquares = 3;
+        } else {
+            numSquares = 6;
+        }
+        resetSquares();
+    });
 });
 
 /* --------------------------- set up the squares --------------------------- */
@@ -142,6 +132,7 @@ for (let i = 0; i < squares.length; i++) {
             message.textContent = "Correct 😄";
             changeColors(clickedColor);
             title.style.backgroundColor = clickedColor;
+            resetButton.textContent = "Play again?";
         } else {
             this.style.backgroundColor = "#000";
             message.textContent = "You suck! 😝";
