@@ -69,9 +69,16 @@ const resetSquares = () => {
 /*//ANCHOR                       Init variables                               */
 /* -------------------------------------------------------------------------- */
 
-//State
+/* --------------------------------- States --------------------------------- */
 let numSquares = 6;
 
+//generates the colors array
+let colors = generateRandomColors(numSquares);
+
+// create the picked color using an array color
+let pickedColor = pickColor();
+
+/* ----------------------------- Select elements ---------------------------- */
 //Picks the squares on the html
 const squares = document.querySelectorAll(".square");
 
@@ -93,49 +100,46 @@ const modeButtons = document.querySelectorAll(".mode");
 /* -------------------------------------------------------------------------- */
 /*  //ANCHOR                          MAIN                                    */
 /* -------------------------------------------------------------------------- */
+function main() {
+    //Our color display gains the picked color as text content
+    colorDisplay.textContent = pickedColor;
 
-//generates the colors array
-let colors = generateRandomColors(numSquares);
+    //reset colors button
+    resetButton.addEventListener("click", resetSquares);
 
-// create the picked color using an array color
-let pickedColor = pickColor();
-
-//Our color display gains the picked color as text content
-colorDisplay.textContent = pickedColor;
-
-/* ------------------------------ reset colors button ------------------------------ */
-resetButton.addEventListener("click", resetSquares);
-
-/* ------------------------------ Mode buttons ------------------------------ */
-modeButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-        modeButtons[0].classList.remove("selected");
-        modeButtons[1].classList.remove("selected");
-        this.classList.add("selected");
-        if (this.textContent === "Easy") {
-            numSquares = 3;
-        } else {
-            numSquares = 6;
-        }
-        resetSquares();
+    //Switch the mode of the buttons and the difficulty of the game
+    modeButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+            modeButtons[0].classList.remove("selected");
+            modeButtons[1].classList.remove("selected");
+            this.classList.add("selected");
+            if (this.textContent === "Easy") {
+                numSquares = 3;
+            } else {
+                numSquares = 6;
+            }
+            resetSquares();
+        });
     });
-});
 
-/* --------------------------- set up the squares --------------------------- */
-for (let i = 0; i < squares.length; i++) {
-    squares[i].style.backgroundColor = colors[i];
+    /* --------------------------- set up the squares --------------------------- */
+    for (let i = 0; i < squares.length; i++) {
+        squares[i].style.backgroundColor = colors[i];
 
-    squares[i].addEventListener("click", function () {
-        const clickedColor = this.style.backgroundColor;
+        squares[i].addEventListener("click", function () {
+            const clickedColor = this.style.backgroundColor;
 
-        if (clickedColor === pickedColor) {
-            message.textContent = "Correct 😄";
-            changeColors(clickedColor);
-            title.style.backgroundColor = clickedColor;
-            resetButton.textContent = "Play again?";
-        } else {
-            this.style.backgroundColor = "#000";
-            message.textContent = "You suck! 😝";
-        }
-    });
+            if (clickedColor === pickedColor) {
+                message.textContent = "Correct 😄";
+                changeColors(clickedColor);
+                title.style.backgroundColor = clickedColor;
+                resetButton.textContent = "Play again?";
+            } else {
+                this.style.backgroundColor = "#000";
+                message.textContent = "You suck! 😝";
+            }
+        });
+    }
 }
+
+main();
