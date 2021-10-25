@@ -1,0 +1,12 @@
+<%- include("partials/header.ejs") %> 
+
+
+    <% if(product === 'dog_food' || product==='chew_toy' || product==='treats'){%>
+    <h1>Click here to buy
+        <%=  product.replace('_',' ') %>
+    </h1>
+    <% }else{%>
+    <h1>Sorry,we don't sell that</h1>
+    <% }%>
+
+<%- include("partials/footer.ejs") %> 

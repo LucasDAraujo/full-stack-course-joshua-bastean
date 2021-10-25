@@ -1,0 +1,11 @@
+<%- include("partials/header")  %>
+
+<h1>Satisfied customers</h1>
+<ul>
+
+    <% customers.forEach(element => { %>
+    <li><%= element %> </li>
+    <% }) %>
+</ul>
+
+<%- include("partials/footer")  %>
