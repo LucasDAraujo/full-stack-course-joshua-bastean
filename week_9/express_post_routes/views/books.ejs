@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My books</title>
+</head>
+
+<body>
+    <!-- NOT USING PARTIALS CAUSE IT'S NOT WORTH ON THIS CASE -->
+    <h1>List of my books</h1>
+    <ul>
+        <% books.forEach(book => { %>
+        <li> <%= `${book.title} - ${book.author}` %> </li>
+        <% }) %>
+    </ul>
+    <form action="/books" method="post">
+        <label for="title">Title of your book</label>
+        <input type="text" name="title" id="title" placeholder="Book title here"  autofocus>
+<br>
+        <label  for="author">Author of your book</label>
+        <input type="text" name="author" placeholder="Book author here" autofocus>
+        <button style="display: block;" type="submit"">Submit</button>
+    </form>
+</body>
+
+</html>
