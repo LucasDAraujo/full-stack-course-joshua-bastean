@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "fetch": "^1.1.0",
+    "node-fetch": "^3.0.0"
+  },
+  "name": "trying_apis",
+  "version": "1.0.0",
+  "main": "myRequest.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "lucas araujo",
+  "license": "ISC",
+  "description": ""
+}
