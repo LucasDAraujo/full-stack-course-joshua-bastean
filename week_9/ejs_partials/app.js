@@ -8,14 +8,14 @@ app.get("/", (req, res) => res.send("Home page!"));
 app.use(express.static("public"));
 
 app.get("/customers", (req, res) => {
-    const customers = [
-        casual.first_name,
-        casual.first_name,
-        casual.first_name,
-        casual.first_name,
-    ];
-
-    res.render("customers.ejs", { customers });
+    res.render("customers.ejs", {
+        customers: [
+            casual.first_name,
+            casual.first_name,
+            casual.first_name,
+            casual.first_name,
+        ],
+    });
 });
 
 app.get("/products/:productId", (req, res) => {
