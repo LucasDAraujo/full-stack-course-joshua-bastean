@@ -1,14 +1,14 @@
-<title>Game page</title>
-<%- include('partials/header') %> 
-<h1 class="page-title">Games Page</h1>
+<%- include('partials/header') %>
 <div class="container">
-    <% games.forEach(game => {%>
-    <%=  %>
-    <div class="card">
-        <img class="card-img" src=" <%= game.image %>" alt="Picture of the game <%= game.title %> ">
-        <h3 class="card-title"><%= game.title %> </h3>
-        <p class="card-description"> <%= game.description %></p>
+    <h1 class="page-title">Games Page</h1>
+    <div class="games-container">
+        <% games.forEach(game => {%>
+        <div class="card">
+            <img class="card-img" src=" <%= game.image %>" alt="Picture of the game <%= game.title %> ">
+            <h3 class="card-title"><%= game.title %> </h3>
+            <p class="card-description"> <%= game.description %></p>
+        </div>
+        <%}); %>
     </div>
-    <%}); %>
 </div>
-<%- include('partials/footer') %> 
+<%- include('partials/footer') %>
