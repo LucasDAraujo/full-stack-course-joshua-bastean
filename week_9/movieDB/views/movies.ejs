@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieDB</title>
+</head>
+
+<body>
+    <h1>Movie DB website</h1>
+    
+    <% data.Search.forEach(movie => { %>
+    <div>
+        <h3><%= movie.Title %> </h3>
+        <img src="<%= movie.Poster %> " alt="Poster from <%= movie.Title %>">
+    </div>
+    <% }) %>
+
+
+</body>
+
+</html>
