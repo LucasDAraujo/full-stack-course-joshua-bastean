@@ -1,4 +1,13 @@
-//THIS IS JUST A TEST, I'LL USE DATABASE
+const config = require("../config");
+const mongoose = require("mongoose");
+mongoose.connect(config.database.connection());
+
+const express = require("express");
+const app = express();
+const port = 3000;
+
+const Game = require("./models/game");
+
 const games = [
     {
         title: "League of Legends",
@@ -19,12 +28,6 @@ const games = [
         image: "https://upload.wikimedia.org/wikipedia/en/6/6e/CSGOcoverMarch2020.jpg",
     },
 ];
-
-const express = require("express");
-const app = express();
-const port = 3000;
-const config = require("../config");
-
 
 //Sets ejs
 app.set("view engine", "ejs");

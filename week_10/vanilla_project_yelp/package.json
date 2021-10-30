@@ -1,5 +1,4 @@
 {
-
   "name": "vanilla_project_yelp",
   "version": "1.0.0",
   "description": "",
@@ -13,6 +12,7 @@
   "dependencies": {
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "mongoose": "^6.0.12",
     "node-fetch": "^3.0.0"
   }
 }
