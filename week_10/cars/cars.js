@@ -29,14 +29,22 @@ const myTruck = new Car({
     mileage: 40000,
     needsRepair: false,
 });
-// One way
-// myTruck.save((err, car) => (err ? console.log(err) : console.log(car)));
+
+//ANCHOR BEST WAY!!!
+//Using promises
+// Car.create(myTruck).then((err, car) =>
+//     err ? console.log(err) : console.log(car)
+// )
 
 // Another way of saving
 // Car.create(myTruck, (err, car) => (err ? console.log(err) : console.log(car)));
 
-//Best way
-//Using promises
-Car.create(myTruck).then((err, car) =>
-    err ? console.log(err) : console.log(car)
-)
+// worst way
+// myTruck.save((err, car) => (err ? console.log(err) : console.log(car)));
+
+//retrieving data
+// .exec() executes our query, returning a promise
+Car.findById('617cb27d6dacfedde34057d4')
+    .exec()
+    .then((foundCars) => console.log(foundCars))
+    .catch((err) => console.log(`Error! ${err}`));
