@@ -1,9 +1,3 @@
-const express = require ("express");
-
-
-const app = express();
-const port = 3000;
-
 //THIS IS JUST A TEST, I'LL USE DATABASE
 const games = [
     {
@@ -26,6 +20,13 @@ const games = [
     },
 ];
 
+const express = require("express");
+const app = express();
+const port = 3000;
+const config = require("../config");
+
+console.log(config.database.username)
+
 //Sets ejs
 app.set("view engine", "ejs");
 
@@ -44,9 +45,9 @@ app.get("/games", (req, res) => {
 
 //games POST route
 app.post("/games", (req, res) => {
-    console.log(req.body)
-    games.push(req.body)
-    res.redirect("/games")
+    console.log(req.body);
+    games.push(req.body);
+    res.redirect("/games");
 });
 
 //form GET route
