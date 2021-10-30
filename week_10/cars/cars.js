@@ -4,10 +4,7 @@
 const config = require("../config");
 const mongoose = require("mongoose");
 
-mongoose.connect(config.database.connection(), {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+mongoose.connect(config.database.connection());
 
 const carSchema = new mongoose.Schema({
     make: String,
