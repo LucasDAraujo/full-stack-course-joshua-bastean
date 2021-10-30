@@ -25,7 +25,6 @@ const app = express();
 const port = 3000;
 const config = require("../config");
 
-console.log(config.database.username)
 
 //Sets ejs
 app.set("view engine", "ejs");
