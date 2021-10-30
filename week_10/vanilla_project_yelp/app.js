@@ -8,26 +8,6 @@ const port = 3000;
 
 const Game = require("./models/game");
 
-const games = [
-    {
-        title: "League of Legends",
-        description:
-            "Coloring book next level paleo pinterest, pour-over fashion axe hell of lumbersexual marfa. Vexillologist coloring book ennui farm-to-table, pour-over artisan heirloom kogi pug hell of 8-bit aesthetic. Intelligentsia hell of echo park portland pour-over. ",
-        image: "https://upload.wikimedia.org/wikipedia/en/c/ca/League_of_Legends_Screenshot_2018.png",
-    },
-    {
-        title: "The Sims 4",
-        description:
-            "Coloring book next level paleo pinterest, pour-over fashion axe hell of lumbersexual marfa. Vexillologist coloring book ennui farm-to-table, pour-over artisan heirloom kogi pug hell of 8-bit aesthetic. Intelligentsia hell of echo park portland pour-over. ",
-        image: "https://upload.wikimedia.org/wikipedia/en/7/7f/Sims4_Rebrand.png",
-    },
-    {
-        title: "CSGO",
-        description:
-            "Coloring book next level paleo pinterest, pour-over fashion axe hell of lumbersexual marfa. Vexillologist coloring book ennui farm-to-table, pour-over artisan heirloom kogi pug hell of 8-bit aesthetic. Intelligentsia hell of echo park portland pour-over.",
-        image: "https://upload.wikimedia.org/wikipedia/en/6/6e/CSGOcoverMarch2020.jpg",
-    },
-];
 
 //Sets ejs
 app.set("view engine", "ejs");
@@ -35,21 +15,43 @@ app.set("view engine", "ejs");
 //Makes the public folder visible
 app.use(express.static("public"));
 
-app.use(express.urlencoded({ extended: true }));
+app.use(
+    express.urlencoded({
+        extended: true,
+    })
+);
 
 //root route
 app.get("/", (req, res) => res.render("landing"));
 
 //games GET route
 app.get("/games", (req, res) => {
-    res.render("games", { games });
+    Game.find()
+        .exec()
+        .then((foundGames) => {
+            res.render("games", { games: foundGames });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.send(err);
+        });
 });
 
 //games POST route
 app.post("/games", (req, res) => {
-    console.log(req.body);
-    games.push(req.body);
-    res.redirect("/games");
+    //Using spread operator to catch the form values
+    const newGame = {
+        ...req.body,
+    };
+    Game.create(newGame)
+        .then((game) => {
+            console.log(game);
+            res.redirect("/games");
+        })
+        .catch((err) => {
+            console.log(err);
+            res.send(err);
+        });
 });
 
 //form GET route
