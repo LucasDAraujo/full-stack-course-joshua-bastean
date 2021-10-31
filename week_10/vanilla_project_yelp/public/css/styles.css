@@ -6,9 +6,6 @@ body {
 .container-fluid{
     min-height: calc(100vh - 76px -24px);
 }
-footer{
-
-}
 
 .card {
     width: 38rem;
