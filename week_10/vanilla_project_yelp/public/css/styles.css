@@ -1,7 +1,13 @@
 body {
     padding: 0 auto;
     margin: 0;
-    font-size: 2rem;
+    font-size: 1.5rem;
+}
+.container-fluid{
+    min-height: calc(100vh - 76px -24px);
+}
+footer{
+
 }
 
 .card {
@@ -25,8 +31,6 @@ body {
     font-family: "Roboto", sans-serif;
     line-height: 1.4;
 }
-
-
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
