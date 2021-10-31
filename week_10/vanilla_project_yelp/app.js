@@ -4,10 +4,9 @@ mongoose.connect(config.database.connection());
 
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = 3001;
 
 const Game = require("./models/game");
-
 
 //Sets ejs
 app.set("view engine", "ejs");
@@ -40,12 +39,13 @@ app.get("/games", (req, res) => {
 //games POST route
 app.post("/games", (req, res) => {
     //Using spread operator to catch the form values
+
     const newGame = {
         ...req.body,
     };
+    newGame.genre = newGame.genre.toLowerCase();
     Game.create(newGame)
         .then((game) => {
-            console.log(game);
             res.redirect("/games");
         })
         .catch((err) => {
@@ -59,9 +59,13 @@ app.get("/games/new", (req, res) => {
     res.render("games_new");
 });
 
-app.get('/games/:id', (req, res) => {
-  res.send(`Show page for game with ID of: ${req.params.id}`)
-})
+//Show route
+app.get("/games/:id", (req, res) => {
+    Game.findById(req.params.id)
+        .exec()
+        .then((game) => res.render("games_show", { game }))
+        .catch((err) => res.send(err));
+});
 
 //404 route
 app.get("*", (req, res) => res.send("That's a 404"));

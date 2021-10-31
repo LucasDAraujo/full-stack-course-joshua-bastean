@@ -1,18 +1,71 @@
 <%- include('partials/header') %>
 <div class="container">
+    <h1>Add a new game</h1>
+    <!-- TODO  
+                    ADD -> date: Date -->
     <form action="/games " method="POST">
         <div class="form-group mt-3">
             <label for="title">Title</label>
-            <input type="text" class="form-control" name='title' placeholder="Ex: Fallout 3" autofocus>
+            <input
+                type="text"
+                class="form-control"
+                name="title"
+                placeholder="Ex: Fallout 3"
+                autofocus
+            />
         </div>
+
+        <div class="form-group mt-3">
+            <label for="genre">Game genre</label>
+            <select name="genre" id="genre" class="form-control">
+                <option disabled selected value="">-- Choose below --</option>
+                <option>Action</option>
+                <option>Fighting</option>
+                <option>Stealth</option>
+                <option>Survival horror</option>
+                <option>Adventure</option>
+                <option>RPG</option>
+                <option>Battle Royale</option>
+                <option>Simulation</option>
+                <option>Racing</option>
+            </select>
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="date">Date of release</label>
+            <input type="date" class="form-control" name="date" /> 
+        </div>
+
         <div class="form-group mt-3">
             <label for="description">Description</label>
-            <input type="text" class="form-control" name='description'>
+            <input type="text" class="form-control" name="description" />
         </div>
+
+        <div class="form-group mt-3">
+            <label for="developer">Game developer</label>
+            <input
+                type="text"
+                class="form-control"
+                name="developer"
+                placeholder="Ex: Random Games"
+            />
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="publisher">Publisher of the game</label>
+            <input
+                type="text"
+                class="form-control"
+                name="publisher"
+                placeholder="Ex: Guerilla Games, Ubisoft, etc..."
+            />
+        </div>
+
         <div class="form-group mt-3">
             <label for="image">Link to image</label>
-            <input type="text" class="form-control" name='image'>
+            <input type="text" class="form-control" name="image" />
         </div>
+
         <button type="submit" class="btn mt-3 btn-primary">Submit</button>
     </form>
 </div>
