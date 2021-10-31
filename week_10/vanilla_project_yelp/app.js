@@ -59,6 +59,10 @@ app.get("/games/new", (req, res) => {
     res.render("games_new");
 });
 
+app.get('/games/:id', (req, res) => {
+  res.send(`Show page for game with ID of: ${req.params.id}`)
+})
+
 //404 route
 app.get("*", (req, res) => res.send("That's a 404"));
 
