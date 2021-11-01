@@ -1,12 +1,38 @@
 body {
     padding: 0 auto;
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 3rem;
 }
-
+/* --------------------------------- NAVBAR --------------------------------- */
+.dropdown-menu{
+    font-size: 3rem;
+}
+a.navbar-brand {
+    width: 7rem;
+    height: 7rem;
+    padding: 0;
+    margin: 0;
+}
+.navbar-toggler {
+    height: 10rem;
+    width: 10rem;
+}
+span.navbar-toggler-icon {
+    font-size: 2.9rem;
+}
+.header-search {
+    font-size:2.5rem;
+}
+i.fa-search{
+    font-size:3rem;
+}
+/* --------------------------------- FOOTER --------------------------------- */
+footer{
+    display: fixed bottom; 
+}
 /* -------------------------------- CARD -------------------------------- */
 .card {
-    width: 38rem;
+    width: 100vw;
 }
 .card-img {
     width: 100%;
@@ -26,6 +52,27 @@ body {
     line-height: 1.4;
 }
 
+/* --------------------------------- QUERIES -------------------------------- */
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    a.navbar-brand {
+        width: 4rem;
+        height: 4rem;
+    }
+    .navbar-toggler {
+        height: 7rem;
+        width: 7rem;
+    }
+    span.navbar-toggler-icon {
+        font-size: 2rem;
+    }
+    .header-search {
+        font-size:2rem;
+    }
+    i.fa-search{
+        font-size:2rem;
+    }
+}
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
@@ -34,15 +81,32 @@ body {
     }
     body {
         font-size: 1em;
-    } 
+    }
     .card-title {
         font-size: 1.6em;
+    }
+
+    a.navbar-brand {
+        width: 2rem;
+        height: 2rem
+    }
+    
+    .header-search {
+        font-size:1.2rem;
+    }
+    i.fa-search{
+        font-size:1.1rem;
+    }
+
+    .dropdown-menu{
+        font-size: 1rem;
     }
 }
 
 /* -------------------------------------------------------------------------- */
 /*                                  SHOW PAGE                                 */
 /* -------------------------------------------------------------------------- */
-.show_image-container img{
-    height: 80%;
+.show_image-container img {
+    height: 20rem;width: 40rem;
 }
+
