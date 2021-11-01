@@ -13,7 +13,6 @@ const gamesSchema = new mongoose.Schema({
 });
 
 //Compiling the game schema into a more advanced constant with CAPITAL C using  mongoose.model
-const Game = mongoose.model("game", gamesSchema);
+//and exporting
 
-//exporting
-module.exports = Game;
+module.exports = mongoose.model("Game", gamesSchema);
