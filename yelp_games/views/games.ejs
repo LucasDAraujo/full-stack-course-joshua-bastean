@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+
+<div class="container-fluid d-flex justify-content-center">
+    <div class="row mt-2 justify-content-center">
+        <% games.forEach(game=> {%>
+
+        <div class="card mx-0 mx-lg-3 my-4  col-sm-1  col-md-3  p-3 p-lg-0">
+            
+            <a rel="next"  href=" games/<%=game._id %> ">
+                <img class="card-img card-img-top" src="<%= game.image %>" alt="Image from <%= game.title %> " />
+            </a>
+            <div class="cad-body">
+                <h3 class="card-title">
+                    <%= game.title %>
+                </h3>
+                <p class="card-text mx-3 mb-3">
+                    <%= game.description %>
+                </p>
+            </div>
+        </div>
+
+        <%}); %>
+    </div>
+</div>
+
+
+<%- include('partials/footer') %>
