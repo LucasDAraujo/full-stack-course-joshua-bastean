@@ -3,6 +3,7 @@ body {
     margin: 0;
     font-size: 3rem;
 }
+
 /* --------------------------------- NAVBAR --------------------------------- */
 .dropdown-menu{
     font-size: 3rem;
@@ -28,7 +29,9 @@ i.fa-search{
 }
 /* --------------------------------- FOOTER --------------------------------- */
 footer{
+
     display: fixed bottom; 
+    position: absolute auto;
 }
 /* -------------------------------- CARD -------------------------------- */
 .card {
