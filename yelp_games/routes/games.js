@@ -44,7 +44,7 @@ router.get("/:id", (req, res) => {
         .exec()
         //Search the comments related to the specific game ID and shows the page
         .then((game) => {
-            Comment.find({ GameId: req.params.id }, (err, comments) => {
+            Comment.find({ gameId: req.params.id }, (err, comments) => {
                 //"game" comes from .then((game)), and comments is the callback argument
                 err
                     ? res.send(err)
@@ -52,6 +52,16 @@ router.get("/:id", (req, res) => {
             });
         })
         .catch((err) => res.send(err));
+});
+
+router.get("/:id/edit", (req, res) => {
+    //Get the game from the database
+    Game.findById(req.params.id)
+        .exec()
+        .then((game) => {
+            //Render de the edit form, passing in that game
+            res.render("games_edit", { game });
+        });
 });
 
 module.exports = router;
