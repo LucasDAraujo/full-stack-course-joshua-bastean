@@ -32,17 +32,31 @@
                     </tr>
                 </tbody>
             </table>
-            <a class="btn btn-outline-primary btn-lg btn-block mb-2" href="">Eddit Button</a>
-            <a class="btn btn-outline-danger">Remove Button</a>
+
+            <div class="d-grid gap-2 my-2">
+                <a
+                    href="/games/<%= game._id %>/edit"
+                    class="btn btn-outline-primary"
+                    type="button"
+                    >Edit</a
+                >
+            </div>
+            <form action="/comics/<%= game._id %>?_method=DELETE" method="POST">
+                <div class="d-grid gap-2 my-2">
+                    <button type="submit" class="btn btn-outline-danger">
+                        Delete
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 
     <div class="row show_comment-header mt-3">COMMENTS</div>
     <% comments.forEach((comment)=>{%>
     <div class="row show_comment-container py-2">
-        <div class="col-3"><%= comment.user %> </div>
-        <div class="col-9"><%= comment.text %> </div>
-    </div> 
+        <div class="col-3"><%= comment.user %></div>
+        <div class="col-9"><%= comment.text %></div>
+    </div>
     <%}) %>
 </div>
 
