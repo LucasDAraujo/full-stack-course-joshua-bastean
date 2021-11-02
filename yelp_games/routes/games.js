@@ -22,7 +22,8 @@ router.post("/", (req, res) => {
     const newGame = {
         ...req.body,
     };
-    newGame.genre = newGame.genre.toLowerCase();
+    newGame.genre = newGame.genre.toLowerCase().replace(" ", "");
+    console.log(newGame.genre);
     Game.create(newGame)
         .then((game) => {
             res.redirect("/games");

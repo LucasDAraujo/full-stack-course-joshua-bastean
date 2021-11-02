@@ -1,0 +1,72 @@
+<%- include('partials/header') %>
+<div class="container">
+    <h1>Add a new game</h1>
+    <!-- TODO  
+                    ADD -> date: Date -->
+    <form action="/games " method="POST">
+        <div class="form-group mt-3">
+            <label for="title">Title</label>
+            <input
+                type="text"
+                class="form-control"
+                name="title"
+                value="<%= game.title %> "
+                
+            />
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="genre">Game genre</label>
+            <select name="genre" id="genre" class="form-control">
+                <option disabled selected >-- Choose below --</option>
+                <option <%=  game.genre === 'action' ? 'selected' : '' %> >Action</option>
+                <option  <%= game.genre === 'fighting' ? 'selected' : '' %>    >Fighting</option>
+                <option  <%= game.genre === 'stealth' ? 'selected' : '' %>  >Stealth</option>
+                <option  <%= game.genre === 'survivalhorror' ? 'selected' : '' %>  >Survival horror</option>
+                <option  <%= game.genre === 'adventure' ? 'selected' : '' %>  >Adventure</option>
+                <option  <%= game.genre === 'rpg' ? 'selected' : '' %>  >RPG</option>
+                <option  <%= game.genre === 'battleroyale' ? 'selected' : '' %>  >Battle Royale</option>
+                <option  <%= game.genre === 'simulation' ? 'selected' : '' %>  >Simulation</option>
+                <option  <%= game.genre === 'racing' ? 'selected' : '' %>  >Racing</option>
+            </select>
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="date">Date of release</label>
+            <input type="date" class="form-control" name="date"  value="<%= game.date.toISOString().split("T")[0] %>" />
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" name="description" value="<%= game.description %>"/>
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="developer">Game developer</label>
+            <input
+                type="text"
+                class="form-control"
+                name="developer"
+                value="<%= game.developer %>"
+            />
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="publisher">Publisher of the game</label>
+            <input
+                type="text"
+                class="form-control"
+                name="publisher"
+                value="<%= game.publisher %>"
+            />
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="image">Link to image</label>
+            <input type="text" class="form-control" name="image" value="<%= game.image %>"/> 
+        </div>
+
+        <button type="submit" class="btn my-4 btn-primary">Submit</button>
+    </form>
+</div>
+<%- include('partials/footer') %>
