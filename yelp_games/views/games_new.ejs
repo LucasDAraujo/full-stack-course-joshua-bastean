@@ -7,6 +7,7 @@
         <div class="form-group mt-3">
             <label for="title">Title</label>
             <input
+                required
                 type="text"
                 class="form-control"
                 name="title"
@@ -17,7 +18,7 @@
 
         <div class="form-group mt-3">
             <label for="genre">Game genre</label>
-            <select name="genre" id="genre" class="form-control">
+            <select name="genre" id="genre" class="form-control required">
                 <option disabled selected value="">-- Choose below --</option>
                 <option>Action</option>
                 <option>Fighting</option>
@@ -33,12 +34,17 @@
 
         <div class="form-group mt-3">
             <label for="date">Date of release</label>
-            <input type="date" class="form-control" name="date" />
+            <input type="date" class="form-control" name="date" required />
         </div>
 
         <div class="form-group mt-3">
             <label for="description">Description</label>
-            <input type="text" class="form-control" name="description" />
+            <input
+                type="text"
+                class="form-control"
+                name="description"
+                required
+            />
         </div>
 
         <div class="form-group mt-3">
@@ -48,6 +54,7 @@
                 class="form-control"
                 name="developer"
                 placeholder="Ex: Random Games"
+                required
             />
         </div>
 
@@ -58,12 +65,13 @@
                 class="form-control"
                 name="publisher"
                 placeholder="Ex: Guerilla Games, Ubisoft, etc..."
+                required
             />
         </div>
 
         <div class="form-group mt-3">
             <label for="image">Link to image</label>
-            <input type="text" class="form-control" name="image" />
+            <input type="text" class="form-control" name="image" required />
         </div>
 
         <button type="submit" class="btn my-4 btn-primary">Submit</button>
