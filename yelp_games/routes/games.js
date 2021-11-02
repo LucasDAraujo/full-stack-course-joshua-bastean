@@ -8,7 +8,7 @@ const fixForm = (reqBody) => {
     return reqBody;
 };
 
-//games GET route
+/* ---------------------------------- INDEX --------------------------------- */
 router.get("/", (req, res) => {
     Game.find()
         .exec()
@@ -23,7 +23,7 @@ router.get("/", (req, res) => {
         });
 });
 
-//games form POST route
+/* --------------------------------- CREATE --------------------------------- */
 router.post("/", (req, res) => {
     const newGame = fixForm(req.body);
 
@@ -37,12 +37,12 @@ router.post("/", (req, res) => {
         });
 });
 
-//games form GET route
+/* ----------------------------------- NEW ---------------------------------- */
 router.get("/new", (req, res) => {
     res.render("games_new");
 });
 
-//Game show route
+/* ---------------------------------- SHOW ---------------------------------- */
 router.get("/:id", (req, res) => {
     const id = req.params.id;
     Game.findById(id)
@@ -67,6 +67,7 @@ router.get("/:id", (req, res) => {
         .catch((err) => res.send(err));
 });
 
+/* ---------------------------------- EDIT ---------------------------------- */
 router.get("/:id/edit", (req, res) => {
     const id = req.params.id;
 
@@ -81,6 +82,7 @@ router.get("/:id/edit", (req, res) => {
         });
 });
 
+/* --------------------------------- UPDATE --------------------------------- */
 router.put("/:id", (req, res) => {
     const id = req.params.id;
     const game = fixForm(req.body);
@@ -88,11 +90,21 @@ router.put("/:id", (req, res) => {
         new: true,
     })
         .exec()
-        .then((updatedComic) => {
-            console.log(updatedComic);
+        .then((updatedGame) => {
+            console.log(updatedGame);
             res.redirect(`/games/${id}`);
         })
         .catch((err) => res.send(`ERROR:${err}`));
 });
 
+/* --------------------------------- DELETE --------------------------------- */
+router.delete("/:id", (req, res) => {
+    Game.findByIdAndDelete(req.params.id)
+        .exec()
+        .then((deletedGame) => {
+            console.log(`Deleted:${deletedGame}`);
+            res.redirect("/games");
+        })
+        .catch((err) => res.send(`ERROR DELETING:${err}`));
+});
 module.exports = router;
