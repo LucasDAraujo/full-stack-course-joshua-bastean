@@ -38,8 +38,8 @@
     <div class="row show_comment-header mt-3">COMMENT HEADER</div>
     <% comments.forEach((comment)=>{%>
     <div class="row show_comment-container py-2">
-        <div class="col-3">Username</div>
-        <div class="col-9">Comment text Here</div>
+        <div class="col-3"><%= comment.user %> </div>
+        <div class="col-9"><%= comment.text %> </div>
     </div> 
     <%}) %>
 </div>
