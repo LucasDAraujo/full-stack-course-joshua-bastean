@@ -16,35 +16,32 @@
                 <tbody>
                     <tr>
                         <th scope="row">Developer</th>
-                        <td><%= game.developer %> </td>
-                       
+                        <td><%= game.developer %></td>
                     </tr>
                     <tr>
                         <th scope="row">Publisher</th>
-                        <td><%= game.publisher %> </td>
+                        <td><%= game.publisher %></td>
                     </tr>
                     <tr>
                         <th scope="row">Genre</th>
-                        <td><%= game.genre %> </td>
+                        <td><%= game.genre %></td>
                     </tr>
                     <tr>
                         <th scope="row">Date</th>
-                        <td><%= game.date %> </td>
+                        <td><%= game.date %></td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <div class="row show_comment-header mt-3">
-        COMMENT HEADER
-    </div>
+    <div class="row show_comment-header mt-3">COMMENT HEADER</div>
+    <% comments.forEach((comment)=>{%>
     <div class="row show_comment-container py-2">
-        <div class="col-3">
-            Username
-        </div>
+        <div class="col-3">Username</div>
         <div class="col-9">Comment text Here</div>
-    </div>
+    </div> 
+    <%}) %>
 </div>
 
 <%- include("./partials/footer.ejs") %>
