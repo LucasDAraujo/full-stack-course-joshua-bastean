@@ -19,8 +19,7 @@ const mainRoutes = require("./routes/main");
 const Game = require("./models/game");
 const Comment = require("./models/comment");
 
-/* ----------------------- OTHER CONFIGURATIONS ---------------------- */
-
+/* ----------------------- OTHER CONFIGURATIONS ---------------------- */ 
 app.set("view engine", "ejs"); // 1 - Set ejs
 app.use(express.static("public")); // 2- Make the public folder visible
 app.use(
