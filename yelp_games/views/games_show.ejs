@@ -28,10 +28,12 @@
                     </tr>
                     <tr>
                         <th scope="row">Date</th>
-                        <td><%= game.date %></td>
+                        <td><%= game.date.toISOString().split("T")[0] %></td>
                     </tr>
                 </tbody>
             </table>
+            <a class="btn btn-outline-primary btn-lg btn-block mb-2" href="">Eddit Button</a>
+            <a class="btn btn-outline-danger">Remove Button</a>
         </div>
     </div>
 
