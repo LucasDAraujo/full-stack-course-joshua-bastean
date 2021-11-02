@@ -1,95 +1,42 @@
+/* ------------------------------ CONFIG IMPORT ----------------------------- */
 const config = require("./config");
-const mongoose = require("mongoose");
-mongoose.connect(config.database.connection());
 
+/* ------------------------------- NPM IMPORTS ------------------------------ */
+const mongoose = require("mongoose");
+
+//Connect to DB
+mongoose.connect(config.database.connection());
 const express = require("express");
 const app = express();
 const port = 3000;
 
+/* ------------------------------ ROUTE IMPORTS ----------------------------- */
+const gameRoutes = require("./routes/games");
+const commentRoutes = require("./routes/comments");
+const mainRoutes = require("./routes/main");
+
+/* ----------------------------- MODEL IMPORTS ----------------------------- */
 const Game = require("./models/game");
 const Comment = require("./models/comment");
 
-//Sets ejs
+/* ----------------------- OTHER CONFIGURATIONS OF APP ---------------------- */
+// 1 - Set ejs
+// 2- Make the public folder visible
+// 3 - Set urlEnconded from express true
 app.set("view engine", "ejs");
-
-//Makes the public folder visible
 app.use(express.static("public"));
-
 app.use(
     express.urlencoded({
         extended: true,
     })
 );
 
-//root route
-app.get("/", (req, res) => res.render("landing"));
+/* ------------------------------- USING ROUTES ------------------------------- */
+app.use("/games",gameRoutes);
+app.use("/games/:id/comments",commentRoutes);
 
-//games GET route
-app.get("/games", (req, res) => {
-    Game.find()
-        .exec()
-        .then((foundGames) => {
-            res.render("games", { games: foundGames });
-        })
-        .catch((err) => {
-            console.log(err);
-            res.send(err);
-        });
-});
+//MAIN ROUTES(WITH 404 ROUTE!)
+app.use("/",mainRoutes);
 
-//games form POST route
-app.post("/games", (req, res) => {
-    //Using spread operator to catch the form values
-
-    const newGame = {
-        ...req.body,
-    };
-    newGame.genre = newGame.genre.toLowerCase();
-    Game.create(newGame)
-        .then((game) => {
-            res.redirect("/games");
-        })
-        .catch((err) => {
-            console.log(err);
-            res.send(err);
-        });
-});
-
-//games form GET route
-app.get("/games/new", (req, res) => {
-    res.render("games_new");
-});
-
-//Game show route
-app.get("/games/:id", (req, res) => {
-    Game.findById(req.params.id)
-        .exec()
-        .then((game) => res.render("games_show", { game }))
-        .catch((err) => res.send(err));
-});
-
-//new comments show form
-//We're going to render a page passing in the game ID
-app.get("/games/:id/comments", (req, res) => {
-    res.render("comments_new", { gameId: req.params.id });
-});
-
-//Create comments  - Actually update DATABASE
-app.post("/games/:id/comments", (req, res) => {
-    //Create the comment
-    Comment.create({
-        ...req.body,
-    })
-        .then((newComment) => {
-            res.redirect(`/games/${req.body.gameId}`);
-        })
-        .catch((err) => {
-            console.log(err);
-            res.redirect(`/games/${req.body.gameId}`);
-        });
-});
-
-//404 route
-app.get("*", (req, res) => res.send("That's a 404"));
-
+/* --------------------------------- LISTEN --------------------------------- */
 app.listen(port, () => console.log(`Yelp_games is working on port ${port}`));
