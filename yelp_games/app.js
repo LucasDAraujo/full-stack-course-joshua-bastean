@@ -29,7 +29,8 @@ const Comment = require("./models/comment");
 app.use(morgan("tiny"));
 
 //Seed the DB
-
+const seed = require("./utils/seed")
+seed()
 /* -------------------------------------------------------------------------- */
 /*                               CONFIGURATIONS                               */
 /* -------------------------------------------------------------------------- */
