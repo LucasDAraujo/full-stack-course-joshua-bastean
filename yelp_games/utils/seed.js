@@ -46,7 +46,7 @@ const seed = async () => {
         console.log("Created game: " + game.title);
         //3- Create a new comment for each game
         await Comment.create({
-            text: "I ruved this Comic Rook",
+            text: `I ruved this game ${game_seed.title}`,
             user: "scooby_doo",
             gameId: game._id,
         });
