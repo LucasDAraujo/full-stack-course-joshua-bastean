@@ -1,8 +1,6 @@
 <%- include('partials/header') %>
 <div class="container">
     <h1>Edit game </h1>
-    <!-- TODO  
-                    ADD -> date: Date -->
     <form action="/games/<%=game._id%>?_method=PUT  " method="POST">
         <div class="form-group mt-3">
             <label for="title">Title</label>
@@ -66,7 +64,7 @@
             <input type="text" class="form-control" name="image" value="<%= game.image %>"/> 
         </div>
 
-        <button type="submit" class="btn my-4 btn-primary">Submit</button>
+        <button type="submit" class="btn my-4 btn-primary" >Submit</button>
     </form>
 </div>
 <%- include('partials/footer') %>
