@@ -8,33 +8,31 @@ const fixForm = (reqBody) => {
     return reqBody;
 };
 
-/* ---------------------------------- INDEX --------------------------------- */
-router.get("/", (req, res) => {
-    Game.find()
-        .exec()
-        .then((foundGames) => {
-            res.render("games", {
-                games: foundGames,
-            });
-        })
-        .catch((err) => {
-            console.log(err);
-            res.send(err);
+/* ---------------------------------- //ANCHOR INDEX--------------------------------- */
+router.get("/", async (req, res) => {
+    try {
+        const games = await Game.find().exec();
+        res.render("games", {
+            games,
         });
+    } catch (err) {
+        console.log(err);
+        res.send(`ERROR:${err}`);
+    }
 });
 
 /* --------------------------------- CREATE --------------------------------- */
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
     const newGame = fixForm(req.body);
 
-    Game.create(newGame)
-        .then((game) => {
-            res.redirect("/games");
-        })
-        .catch((err) => {
-            console.log(err);
-            res.send(err);
-        });
+    try {
+        const game = await Game.create(newGame);
+        console.log(game);
+        res.redirect(`/games/${game._id}`);
+    } catch (err) {
+        console.log(err);
+        res.send(`ERROR ON /games POST:${err}`);
+    }
 });
 
 /* ----------------------------------- NEW ---------------------------------- */
@@ -43,68 +41,51 @@ router.get("/new", (req, res) => {
 });
 
 /* ---------------------------------- SHOW ---------------------------------- */
-router.get("/:id", (req, res) => {
+router.get("/:id", async (req, res) => {
     const id = req.params.id;
-    Game.findById(id)
-        .exec()
-        //Search the comments related to the specific game ID and shows the page
-        .then((game) => {
-            Comment.find(
-                {
-                    gameId: id,
-                },
-                (err, comments) => {
-                    //"game" comes from .then((game)), and comments is the callback argument
-                    err
-                        ? res.send(err)
-                        : res.render("games_show", {
-                              game,
-                              comments,
-                          });
-                }
-            );
-        })
-        .catch((err) => res.send(err));
+    try {
+        const game = await Game.findById(id).exec();
+        const comments = await Comment.find({ gameId: id });
+        res.render("games_show", { game, comments });
+    } catch (err) {
+        console.log(`ERROR ON /games/${id} <br> SHOW ${err}`);
+    }
 });
 
 /* ---------------------------------- EDIT ---------------------------------- */
-router.get("/:id/edit", (req, res) => {
+router.get("/:id/edit", async (req, res) => {
     const id = req.params.id;
-
-    //Get the game from the database
-    Game.findById(id)
-        .exec()
-        .then((game) => {
-            //Render de the edit form, passing in that game
-            res.render("games_edit", {
-                game,
-            });
-        });
+    try {
+        const game = await Game.findById(id).exec();
+        res.render("games_edit", { game });
+    } catch (err) {
+        console.log(`ERROR ON /games/${id}/edit <br> EDIT ${err}`);
+    }
 });
 
-/* --------------------------------- UPDATE --------------------------------- */
-router.put("/:id", (req, res) => {
+/* ---------------------------------//ANCHOR UPDATE --------------------------------- */
+router.put("/:id", async (req, res) => {
     const id = req.params.id;
-    const game = fixForm(req.body);
-    Game.findByIdAndUpdate(id, game, {
-        new: true,
-    })
-        .exec()
-        .then((updatedGame) => {
-            console.log(updatedGame);
-            res.redirect(`/games/${id}`);
-        })
-        .catch((err) => res.send(`ERROR:${err}`));
+    try {
+        const game = fixForm(req.body);
+        const updatedGame = await Game.findByIdAndUpdate(id, game, {
+            new: true,
+        }).exec();
+        console.log(updatedGame);
+        res.redirect(`/games/${id}`);
+    } catch (err) {
+        res.send(`ERROR on /games/${id}/edit UPDATE`);
+    }
 });
 
 /* --------------------------------- DELETE --------------------------------- */
-router.delete("/:id", (req, res) => {
-    Game.findByIdAndDelete(req.params.id)
-        .exec()
-        .then((deletedGame) => {
-            console.log(`Deleted:${deletedGame}`);
-            res.redirect("/games");
-        })
-        .catch((err) => res.send(`ERROR DELETING:${err}`));
+router.delete("/:id", async (req, res) => {
+    try {
+        deletedGame = await Game.findByIdAndDelete(req.params.id).exec();
+        console.log(`Deleted:${deletedGame}`);
+        res.redirect("/games");
+    } catch (err) {
+        res.send(`ERROR on /games/${req.params.id} DELETE`);
+    }
 });
 module.exports = router;
