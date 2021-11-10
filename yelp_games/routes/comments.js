@@ -30,14 +30,6 @@ router.get("/:commentId/edit", async (req, res) => {
         const game = await Game.findById(req.params.id).exec();
         const comment = await Comment.findById(req.params.commentId).exec();
         res.render("comments_edit", { game, comment });
-        console.log(
-            "🚀 ~ file: comments.js ~ line 30 ~ router.get ~ game",
-            game
-        );
-        console.log(
-            "🚀 ~ file: comments.js ~ line 32 ~ router.get ~ comment",
-            comment
-        );
     } catch (err) {
         console.log("ERROR HERE: " + err);
         res.send(`ERROR ON: /:commentId/edit GET comments`);
@@ -52,15 +44,21 @@ router.put("/:commentId", async (req, res) => {
             { text: req.body.text },
             { new: true }
         );
-        console.log(
-            "🚀 ~ file: comments.js ~ line 55 ~ router.put ~ updatedComment",
-            updatedComment
-        );
         res.redirect(`/games/${req.params.id}`);
     } catch (err) {
         console.log(err);
         res.send("ERROR ON: /:commentId PUT");
     }
 });
+
 //DELETE Comment
+router.delete("/:commentId", async (req, res) => {
+    try {
+        const comment = await Comment.findByIdAndDelete(req.params.commentId);
+        res.redirect(`/games/${req.params.id}`);
+    } catch (err) {
+        console.log("ERROR:" + err);
+        res.send("ERROR: /commentId DELETE: <br>" + err);
+    }
+});
 module.exports = router;
