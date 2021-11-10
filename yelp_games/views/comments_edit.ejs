@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+
+<div class="container">
+    <h1>Add a new comment</h1>
+    <form
+        action="/games/<%=game._id%>/comments/<%= comment._id  %>?_method=PUT"
+        method="POST"
+    >
+        <div class="form-group">
+            <label for="text">Your comment here</label>
+            <textarea
+                style="resize: none"
+                name="text"
+                id="text"
+                cols="80"
+                rows="8"
+                class="form-control"
+                placeholder="your comment"
+                required
+            >
+<%= comment.text %> </textarea
+            >
+        </div>
+        <div class="d-grid gap-2 my-1">
+            <button class="btn btn-primary" type="submit">
+                Submit comment
+            </button>
+        </div>
+    </form>
+</div>
+
+<%- include('partials/footer') %>
