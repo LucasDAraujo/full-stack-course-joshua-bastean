@@ -40,6 +40,21 @@ router.get("/new", (req, res) => {
     res.render("games_new");
 });
 
+/* ---------------------------------- SEARCH -------------------------------- */
+router.get("/search", async (req, res) => {
+    try {
+        const games =  await Game.find({
+            $text:{
+                $search:req.query.term
+            }
+        });
+        res.render("games",{games});
+    } catch (err) {
+        console.log(err);
+        res.send("Broken search");
+    }
+});
+
 /* ---------------------------------- SHOW ---------------------------------- */
 router.get("/:id", async (req, res) => {
     const id = req.params.id;
