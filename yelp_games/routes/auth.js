@@ -29,4 +29,26 @@ router.post("/signup", async (req, res) => {
     }
 });
 
+//Login - Show form
+router.get("/login", (req, res) => {
+    res.render("login");
+});
+
+//Login
+router.post(
+    "/login",
+    passport.authenticate("local", {
+        successRedirect: "/games",
+        failureRedirect: "/login",
+    })
+);
+
+//Logout
+router.get("/logout", (req, res) => {
+    req.logout();
+    res.redirect("/games");
+});
+
+//Logout
+
 module.exports = router;
