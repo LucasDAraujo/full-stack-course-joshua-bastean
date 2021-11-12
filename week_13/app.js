@@ -40,7 +40,7 @@ app.get("/", (req, res) => {
 });
 
 //Account route
-app.get("/account", (req, res) => {
+app.get("/account", isLoggedIn, (req, res) => {
     res.render("account");
 });
 
@@ -85,6 +85,17 @@ app.get("/logout", (req, res) => {
     req.logout();
     res.redirect("/");
 });
+
+//Authorization middleware
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        //Is the user logged in? if so, continue
+        return next();
+    } else {
+        //else, redirect to /login
+        res.redirect("/login");
+    }
+}
 
 app.listen(port, () => {
     console.log(`App is listening on port ${port}`);
