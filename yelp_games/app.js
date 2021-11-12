@@ -12,6 +12,9 @@ const app = express();
 const port = 3000;
 const methodOverride = require("method-override");
 const morgan = require("morgan");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const expressSession = require("express-session");
 
 //- ROUTE IMPORTS -
 const gameRoutes = require("./routes/games");
@@ -21,6 +24,7 @@ const mainRoutes = require("./routes/main");
 //- MODEL IMPORTS -
 const Game = require("./models/game");
 const Comment = require("./models/comment");
+const User = require("./models/user");
 
 /* -------------------------------------------------------------------------- */
 /*                                 DEVELOPMENT                                */
@@ -29,8 +33,8 @@ const Comment = require("./models/comment");
 app.use(morgan("tiny"));
 
 //Seed the DB
-const seed = require("./utils/seed")
-seed()
+const seed = require("./utils/seed");
+seed();
 /* -------------------------------------------------------------------------- */
 /*                               CONFIGURATIONS                               */
 /* -------------------------------------------------------------------------- */
@@ -41,6 +45,15 @@ mongoose.connect(config.database.connection());
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
+//Express Session Configuration
+app.use(
+    expressSession({
+        secret: "aLSDKAhdpoasudhasdasxcosncsad689&W#&@W#2332*-ASD+ASDQWRE5R",
+        resave: "false",
+        saveUninitialized: false,
+    })
+);
+
 //Url encode config
 app.use(
     express.urlencoded({
@@ -50,6 +63,13 @@ app.use(
 
 //Method override config
 app.use(methodOverride("_method"));
+
+//Passport configuration
+app.use(passport.initialize());
+app.use(passport.session()); //Allows persistent sessions
+passport.serializeUser(User.serializeUser()); //Tells us what data should be stored in sesion
+passport.deserializeUser(User.deserializeUser()); // Get the user data from th e stored session
+passport.use(new LocalStrategy(User.authenticate())); // Use the local strategy
 
 //Route config
 app.use("/games", gameRoutes);
