@@ -20,6 +20,7 @@ const expressSession = require("express-session");
 const gameRoutes = require("./routes/games");
 const commentRoutes = require("./routes/comments");
 const mainRoutes = require("./routes/main");
+const authRoutes = require("./routes/auth");
 
 //- MODEL IMPORTS -
 const Game = require("./models/game");
@@ -74,6 +75,7 @@ passport.use(new LocalStrategy(User.authenticate())); // Use the local strategy
 //Route config
 app.use("/games", gameRoutes);
 app.use("/games/:id/comments", commentRoutes);
+app.use("/", authRoutes);
 app.use("/", mainRoutes);
 
 /* -------------------------------------------------------------------------- */
