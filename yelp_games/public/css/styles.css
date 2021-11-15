@@ -8,6 +8,8 @@ a {
     text-decoration: none;
 }
 
+
+
 /* --------------------------------- NAVBAR --------------------------------- */
 .dropdown-menu {
     font-size: 3rem;
@@ -73,6 +75,22 @@ footer {
     color: #000;
 }
 
+/* OTHERS */
+/* .show_comment-container{
+    font-size:2rem;
+}
+.show_comment-container button.btn, .show_comment-container a.btn{
+    font-size:2rem;
+} */
+input.form-control {
+    font-size: 4rem;
+}
+a.btn{
+    font-size:3rem;
+}
+button.btn{
+    font-size:3rem;
+}
 /* --------------------------------- QUERIES -------------------------------- */
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) and (max-width: 767.98px) {
@@ -121,6 +139,17 @@ footer {
 
     .dropdown-menu {
         font-size: 1rem;
+    }
+
+    input.form-control {
+        font-size: 1rem;
+    }
+    
+    button.btn{
+        font-size:1rem;
+    }
+    a.btn{
+        font-size:1rem;
     }
 }
 
