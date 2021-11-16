@@ -12,9 +12,8 @@ const fixForm = (reqBody) => {
 router.get("/", async (req, res) => {
     try {
         const games = await Game.find().exec();
-        res.render("games", {
-            games,
-        });
+        //This is going to change later
+        res.render("games", { games, user: req.user });
     } catch (err) {
         console.log(err);
         res.send(`ERROR:${err}`);
@@ -43,12 +42,12 @@ router.get("/new", (req, res) => {
 /* ---------------------------------- SEARCH -------------------------------- */
 router.get("/search", async (req, res) => {
     try {
-        const games =  await Game.find({
-            $text:{
-                $search:req.query.term
-            }
+        const games = await Game.find({
+            $text: {
+                $search: req.query.term,
+            },
         });
-        res.render("games",{games});
+        res.render("games", { games });
     } catch (err) {
         console.log(err);
         res.send("Broken search");
