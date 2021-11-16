@@ -72,6 +72,12 @@ passport.serializeUser(User.serializeUser()); //Tells us what data should be sto
 passport.deserializeUser(User.deserializeUser()); // Get the user data from th e stored session
 passport.use(new LocalStrategy(User.authenticate())); // Use the local strategy
 
+//Current user middleware config
+app.use((req, res, next) => {
+    res.locals.user = req.user;
+    next();
+});
+
 //Route config
 app.use("/games", gameRoutes);
 app.use("/games/:id/comments", commentRoutes);
