@@ -34,8 +34,9 @@ const User = require("./models/user");
 app.use(morgan("tiny"));
 
 //Seed the DB
-const seed = require("./utils/seed");
-seed();
+// const seed = require("./utils/seed");
+// seed();
+
 /* -------------------------------------------------------------------------- */
 /*                               CONFIGURATIONS                               */
 /* -------------------------------------------------------------------------- */

@@ -3,13 +3,9 @@ const router = express.Router();
 const Game = require("../models/game");
 const Comment = require("../models/comment");
 
-const fixForm = (reqBody) => {
-    reqBody.genre = reqBody.genre.toLowerCase().replace(" ", "");
-    return reqBody;
-};
-
 /* ---------------------------------- //ANCHOR INDEX--------------------------------- */
 router.get("/", async (req, res) => {
+    console.log(req.user);
     try {
         const games = await Game.find().exec();
         //This is going to change later
@@ -20,10 +16,19 @@ router.get("/", async (req, res) => {
     }
 });
 
-/* --------------------------------- CREATE --------------------------------- */
-router.post("/", async (req, res) => {
-    const newGame = fixForm(req.body);
+/* --------------------------------- //ANCHOR CREATE --------------------------------- */
+router.post("/", isLoggedIn, async (req, res) => {
+    //Lower case and spaces
 
+    //Create a new game
+    const newGame = {
+        ...req.body,
+        owner: { id: req.user._id, username: req.user.username },
+    };
+
+    console.log(newGame);
+
+    //POST it on the Database
     try {
         const game = await Game.create(newGame);
         console.log(game);
@@ -35,7 +40,7 @@ router.post("/", async (req, res) => {
 });
 
 /* ----------------------------------- NEW ---------------------------------- */
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
     res.render("games_new");
 });
 
@@ -67,10 +72,11 @@ router.get("/:id", async (req, res) => {
 });
 
 /* ---------------------------------- EDIT ---------------------------------- */
-router.get("/:id/edit", async (req, res) => {
+router.get("/:id/edit", isLoggedIn, async (req, res) => {
     const id = req.params.id;
     try {
         const game = await Game.findById(id).exec();
+        game.genre = genreFix(game.genre);
         res.render("games_edit", { game });
     } catch (err) {
         console.log(`ERROR ON /games/${id}/edit <br> EDIT ${err}`);
@@ -78,22 +84,26 @@ router.get("/:id/edit", async (req, res) => {
 });
 
 /* ---------------------------------//ANCHOR UPDATE --------------------------------- */
-router.put("/:id", async (req, res) => {
+router.put("/:id", isLoggedIn, async (req, res) => {
     const id = req.params.id;
     try {
-        const game = fixForm(req.body);
+        const game = {
+            ...req.body,
+            owner: { id: req.user._id, username: req.user.username },
+        };
         const updatedGame = await Game.findByIdAndUpdate(id, game, {
             new: true,
         }).exec();
         console.log(updatedGame);
         res.redirect(`/games/${id}`);
     } catch (err) {
+        console.log(err);
         res.send(`ERROR on /games/${id}/edit UPDATE`);
     }
 });
 
 /* --------------------------------- DELETE --------------------------------- */
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", isLoggedIn, async (req, res) => {
     try {
         deletedGame = await Game.findByIdAndDelete(req.params.id).exec();
         console.log(`Deleted:${deletedGame}`);
@@ -102,4 +112,16 @@ router.delete("/:id", async (req, res) => {
         res.send(`ERROR on /games/${req.params.id} DELETE`);
     }
 });
+
+/* ---------------------------------- UTIL ---------------------------------- */
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    } else {
+        res.redirect("/login");
+    }
+}
+function genreFix(genre) {
+    return genre.toLowerCase().replace(" ", "");
+}
 module.exports = router;

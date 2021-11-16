@@ -37,21 +37,22 @@ const seed = async () => {
     //1- delete all the current games and comment
     await Game.deleteMany();
     console.log("Deleted all the games.");
+    
     await Comment.deleteMany();
     console.log("Deleted all the comments.");
 
-    //2- Create three new games
-    for (const game_seed of game_seeds) {
-        let game = await Game.create(game_seed);
-        console.log("Created game: " + game.title);
-        //3- Create a new comment for each game
-        await Comment.create({
-            text: `I ruved this game ${game_seed.title}`,
-            user: "scooby_doo",
-            gameId: game._id,
-        });
-        console.log("Created a new comment!");
-    }
+    // //2- Create three new games
+    // for (const game_seed of game_seeds) {
+    //     let game = await Game.create(game_seed);
+    //     console.log("Created game: " + game.title);
+    //     //3- Create a new comment for each game
+    //     await Comment.create({
+    //         text: `I ruved this game ${game_seed.title}`,
+    //         user: "scooby_doo",
+    //         gameId: game._id,
+    //     });
+    //     console.log("Created a new comment!");
+    // }
 };
 
 module.exports = seed;
