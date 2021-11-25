@@ -3,7 +3,7 @@ const router = express.Router();
 const Game = require("../models/game");
 const Comment = require("../models/comment");
 
-/* ---------------------------------- //ANCHOR INDEX--------------------------------- */
+/* ------------------------------ ANCHOR INDEX ------------------------------ */
 router.get("/", async (req, res) => {
     console.log(req.user);
     try {
@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-/* --------------------------------- //ANCHOR CREATE --------------------------------- */
+/* ------------------------------ ANCHOR CREATE ----------------------------- */
 router.post("/", isLoggedIn, async (req, res) => {
     //Lower case and spaces
 
@@ -39,12 +39,12 @@ router.post("/", isLoggedIn, async (req, res) => {
     }
 });
 
-/* ----------------------------------- NEW ---------------------------------- */
+/* ------------------------------- ANCHOR NEW ------------------------------- */
 router.get("/new", isLoggedIn, (req, res) => {
     res.render("games_new");
 });
 
-/* ---------------------------------- SEARCH -------------------------------- */
+/* ------------------------------ ANCHOR SEARCH ----------------------------- */
 router.get("/search", async (req, res) => {
     try {
         const games = await Game.find({
@@ -59,7 +59,7 @@ router.get("/search", async (req, res) => {
     }
 });
 
-/* ---------------------------------- SHOW ---------------------------------- */
+/* ------------------------------- ANCHOR SHOW ------------------------------ */
 router.get("/:id", async (req, res) => {
     const id = req.params.id;
     try {
@@ -71,7 +71,7 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-/* ---------------------------------- EDIT ---------------------------------- */
+/* ------------------------------- ANCHOR EDIT ------------------------------ */
 router.get("/:id/edit", isLoggedIn, async (req, res) => {
     const id = req.params.id;
     try {
@@ -83,7 +83,7 @@ router.get("/:id/edit", isLoggedIn, async (req, res) => {
     }
 });
 
-/* ---------------------------------//ANCHOR UPDATE --------------------------------- */
+/* ------------------------------ ANCHOR UPDATE ----------------------------- */
 router.put("/:id", isLoggedIn, async (req, res) => {
     const id = req.params.id;
     try {
@@ -102,7 +102,7 @@ router.put("/:id", isLoggedIn, async (req, res) => {
     }
 });
 
-/* --------------------------------- DELETE --------------------------------- */
+/* ------------------------------ ANCHOR DELETE ----------------------------- */
 router.delete("/:id", isLoggedIn, async (req, res) => {
     try {
         deletedGame = await Game.findByIdAndDelete(req.params.id).exec();
@@ -113,7 +113,7 @@ router.delete("/:id", isLoggedIn, async (req, res) => {
     }
 });
 
-/* ---------------------------------- UTIL ---------------------------------- */
+/* ------------------------------- ANCHOR UTIL ------------------------------ */
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
