@@ -15,6 +15,7 @@ router.post("/", async (req, res) => {
     try {
         const newComment = await Comment.create({
             ...req.body,
+            owner: { id: req.user._id, username: req.user.username },
         });
         console.log(newComment);
         res.redirect(`/games/${req.body.gameId}`);
