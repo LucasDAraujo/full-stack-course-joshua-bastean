@@ -9,7 +9,7 @@ router.get("/new", (req, res) => {
     res.render("comments_new", { gameId: req.params.id });
 });
 
-// Create comments  - Actually update DATABASE
+// ANCHOR CREATE comments  - Actually update DATABASE
 router.post("/", async (req, res) => {
     // Create the comment
     try {
@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
     }
 });
 
-//EDIT - Show the edit form
+//ANCHOR EDIT - Show the edit form
 router.get("/:commentId/edit", async (req, res) => {
     try {
         const game = await Game.findById(req.params.id).exec();
@@ -36,7 +36,7 @@ router.get("/:commentId/edit", async (req, res) => {
     }
 });
 
-//UPDATE Comment - actually update the db
+//ANCHOR UPDATE Comment - actually update the db
 router.put("/:commentId", async (req, res) => {
     try {
         const updatedComment = await Comment.findByIdAndUpdate(
@@ -51,7 +51,7 @@ router.put("/:commentId", async (req, res) => {
     }
 });
 
-//DELETE Comment
+//ANCHOR DELETE Comment
 router.delete("/:commentId", async (req, res) => {
     try {
         const comment = await Comment.findByIdAndDelete(req.params.commentId);
