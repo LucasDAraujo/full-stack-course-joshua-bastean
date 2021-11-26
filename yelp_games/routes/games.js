@@ -75,12 +75,24 @@ router.get("/:id", async (req, res) => {
 /* ------------------------------- ANCHOR EDIT ------------------------------ */
 router.get("/:id/edit", isLoggedIn, async (req, res) => {
     const id = req.params.id;
-    try {
+
+    //Check if the user is logged in
+    if (req.isAuthenticated()) {
+        //If logged in , check if he they own the game
         const game = await Game.findById(id).exec();
-        game.genre = genreFix(game.genre);
-        res.render("games_edit", { game });
-    } catch (err) {
-        console.log(`ERROR ON /games/${id}/edit <br> EDIT ${err}`);
+
+        //If owner, then render the form to edit
+        if (game.owner.id.equals(req.user.id)) {
+            
+            game.genre = genreFix(game.genre);
+            res.render("games_edit", { game });
+        } else {
+            //If not, redirect back to the show page
+            res.redirect(`/games/${game._id}`);
+        }
+    } else {
+        //If not logged in, redirect to /login
+        res.redirect("/login");
     }
 });
 
@@ -118,4 +130,5 @@ router.delete("/:id", isLoggedIn, async (req, res) => {
 function genreFix(genre) {
     return genre.toLowerCase().replace(" ", "");
 }
+
 module.exports = router;
