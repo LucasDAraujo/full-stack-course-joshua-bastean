@@ -3,7 +3,7 @@ const router = express.Router();
 const Game = require("../models/game");
 const Comment = require("../models/comment");
 const isLoggedIn = require("../utils/isLoggedIn");
-
+const checkGameOwner = require("../utils/checkGameOwner");
 /* ------------------------------ ANCHOR INDEX ------------------------------ */
 router.get("/", async (req, res) => {
     console.log(req.user);
@@ -73,32 +73,18 @@ router.get("/:id", async (req, res) => {
 });
 
 /* ------------------------------- ANCHOR EDIT ------------------------------ */
-router.get("/:id/edit", isLoggedIn, async (req, res) => {
-    const id = req.params.id;
-
-    //Check if the user is logged in
-    if (req.isAuthenticated()) {
-        //If logged in , check if he they own the game
-        const game = await Game.findById(id).exec();
-
-        //If owner, then render the form to edit
-        if (game.owner.id.equals(req.user.id)) {
-            
-            game.genre = genreFix(game.genre);
-            res.render("games_edit", { game });
-        } else {
-            //If not, redirect back to the show page
-            res.redirect(`/games/${game._id}`);
-        }
-    } else {
-        //If not logged in, redirect to /login
-        res.redirect("/login");
-    }
+router.get("/:id/edit", checkGameOwner, async (req, res) => {
+    //If owner, then render the form to edit
+    const game = await Game.findById(req.params.id).exec();
+    game.genre = genreFix(game.genre);
+    res.render("games_edit", { game });
 });
 
 /* ------------------------------ ANCHOR UPDATE ----------------------------- */
-router.put("/:id", isLoggedIn, async (req, res) => {
+router.put("/:id", checkGameOwner, async (req, res) => {
     const id = req.params.id;
+
+    //If owner, then update
     try {
         const game = {
             ...req.body,
@@ -117,6 +103,7 @@ router.put("/:id", isLoggedIn, async (req, res) => {
 
 /* ------------------------------ ANCHOR DELETE ----------------------------- */
 router.delete("/:id", isLoggedIn, async (req, res) => {
+    //If owner, then delete
     try {
         deletedGame = await Game.findByIdAndDelete(req.params.id).exec();
         console.log(`Deleted:${deletedGame}`);
