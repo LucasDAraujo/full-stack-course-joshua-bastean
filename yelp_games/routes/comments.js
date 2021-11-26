@@ -2,10 +2,11 @@ const express = require("express");
 const router = express.Router({ mergeParams: true });
 const Game = require("../models/game");
 const Comment = require("../models/comment");
+const isLoggedIn = require("../utils/isLoggedIn");
 
 // We're going to render a page passing in the game ID
 // NEW COMMENTS -> SHOW FORM
-router.get("/new", (req, res) => {
+router.get("/new",isLoggedIn, (req, res) => {
     res.render("comments_new", { gameId: req.params.id });
 });
 
@@ -64,15 +65,5 @@ router.delete("/:commentId", isLoggedIn, async (req, res) => {
     }
 });
 
-/* --------------------------- ANCHOR IS LOGGED IN -------------------------- */
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    } else {
-        res.redirect("/login");
-    }
-}
-function genreFix(genre) {
-    return genre.toLowerCase().replace(" ", "");
-}
+
 module.exports = router;

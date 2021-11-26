@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Game = require("../models/game");
 const Comment = require("../models/comment");
+const isLoggedIn = require("../utils/isLoggedIn");
 
 /* ------------------------------ ANCHOR INDEX ------------------------------ */
 router.get("/", async (req, res) => {
@@ -113,14 +114,7 @@ router.delete("/:id", isLoggedIn, async (req, res) => {
     }
 });
 
-/* --------------------------- ANCHOR IS LOGGED IN -------------------------- */
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    } else {
-        res.redirect("/login");
-    }
-}
+/* ---------------------------- ANCHOR GENRE FIX ---------------------------- */
 function genreFix(genre) {
     return genre.toLowerCase().replace(" ", "");
 }
