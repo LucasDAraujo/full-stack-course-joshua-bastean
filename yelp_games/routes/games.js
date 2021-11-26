@@ -102,7 +102,7 @@ router.put("/:id", checkGameOwner, async (req, res) => {
 });
 
 /* ------------------------------ ANCHOR DELETE ----------------------------- */
-router.delete("/:id", isLoggedIn, async (req, res) => {
+router.delete("/:id", checkGameOwner, async (req, res) => {
     //If owner, then delete
     try {
         deletedGame = await Game.findByIdAndDelete(req.params.id).exec();

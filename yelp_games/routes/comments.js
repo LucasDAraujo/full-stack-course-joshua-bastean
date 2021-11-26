@@ -3,10 +3,11 @@ const router = express.Router({ mergeParams: true });
 const Game = require("../models/game");
 const Comment = require("../models/comment");
 const isLoggedIn = require("../utils/isLoggedIn");
+const checkCommentOwner = require("../utils/checkCommentOwner");
 
 // We're going to render a page passing in the game ID
 // NEW COMMENTS -> SHOW FORM
-router.get("/new",isLoggedIn, (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
     res.render("comments_new", { gameId: req.params.id });
 });
 
@@ -28,19 +29,14 @@ router.post("/", isLoggedIn, async (req, res) => {
 });
 
 //ANCHOR EDIT - Show the edit form
-router.get("/:commentId/edit", isLoggedIn, async (req, res) => {
-    try {
-        const game = await Game.findById(req.params.id).exec();
-        const comment = await Comment.findById(req.params.commentId).exec();
-        res.render("comments_edit", { game, comment });
-    } catch (err) {
-        console.log("ERROR HERE: " + err);
-        res.send(`ERROR ON: /:commentId/edit GET comments`);
-    }
+router.get("/:commentId/edit", checkCommentOwner, async (req, res) => {
+    const game = await Game.findById(req.params.id).exec();
+    const comment = await Comment.findById(req.params.commentId).exec();
+    res.render("comments_edit", { game, comment });
 });
 
 //ANCHOR UPDATE Comment - actually update the db
-router.put("/:commentId", isLoggedIn, async (req, res) => {
+router.put("/:commentId", checkCommentOwner, async (req, res) => {
     try {
         const updatedComment = await Comment.findByIdAndUpdate(
             req.params.commentId,
@@ -55,7 +51,7 @@ router.put("/:commentId", isLoggedIn, async (req, res) => {
 });
 
 //ANCHOR DELETE Comment
-router.delete("/:commentId", isLoggedIn, async (req, res) => {
+router.delete("/:commentId", checkCommentOwner, async (req, res) => {
     try {
         const comment = await Comment.findByIdAndDelete(req.params.commentId);
         res.redirect(`/games/${req.params.id}`);
@@ -64,6 +60,5 @@ router.delete("/:commentId", isLoggedIn, async (req, res) => {
         res.send("ERROR: /commentId DELETE: <br>" + err);
     }
 });
-
 
 module.exports = router;
