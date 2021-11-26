@@ -3,21 +3,9 @@
 <div class="container">
     <h1>Add a new comment</h1>
     <form action="/games/<%=gameId%>/comments" method="POST">
-        <div class="form-group">
-            <label for="user">Your username</label>
-            <!-- THIS IS TEMPORARY, i'm gonna add users later -->
-            <input
-                type="text"
-                name="user"
-                id="user"
-                class="form-control placeholder="
-                Username
-                autofocus
-                required
-            />
-        </div>
-        <div class="form-group">
-            <label for="text">Your comment here</label>
+       
+        <div class="form-group ">
+            <label for="text" >Your comment here</label>
             <textarea
                 style="resize: none"
                 name="text"
@@ -25,12 +13,12 @@
                 cols="80"
                 rows="8"
                 class="form-control"
-                placeholder="your comment"
+                placeholder="I like this game..."
                 required
             ></textarea>
         </div>
         <input type="hidden" name="gameId" value="<%=gameId%>"/>
-        <div class="d-grid gap-2 my-1">
+        <div class="d-grid gap-2 my-4">
             <button class="btn btn-primary"  type="submit">Submit comment</button>
         </div>
     </form>

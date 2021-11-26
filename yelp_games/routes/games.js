@@ -113,7 +113,7 @@ router.delete("/:id", isLoggedIn, async (req, res) => {
     }
 });
 
-/* ------------------------------- ANCHOR UTIL ------------------------------ */
+/* --------------------------- ANCHOR IS LOGGED IN -------------------------- */
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
         return next();

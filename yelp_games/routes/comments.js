@@ -10,7 +10,7 @@ router.get("/new", (req, res) => {
 });
 
 // ANCHOR CREATE comments  - Actually update DATABASE
-router.post("/", async (req, res) => {
+router.post("/", isLoggedIn, async (req, res) => {
     // Create the comment
     try {
         const newComment = await Comment.create({
@@ -27,7 +27,7 @@ router.post("/", async (req, res) => {
 });
 
 //ANCHOR EDIT - Show the edit form
-router.get("/:commentId/edit", async (req, res) => {
+router.get("/:commentId/edit", isLoggedIn, async (req, res) => {
     try {
         const game = await Game.findById(req.params.id).exec();
         const comment = await Comment.findById(req.params.commentId).exec();
@@ -39,7 +39,7 @@ router.get("/:commentId/edit", async (req, res) => {
 });
 
 //ANCHOR UPDATE Comment - actually update the db
-router.put("/:commentId", async (req, res) => {
+router.put("/:commentId", isLoggedIn, async (req, res) => {
     try {
         const updatedComment = await Comment.findByIdAndUpdate(
             req.params.commentId,
@@ -54,7 +54,7 @@ router.put("/:commentId", async (req, res) => {
 });
 
 //ANCHOR DELETE Comment
-router.delete("/:commentId", async (req, res) => {
+router.delete("/:commentId", isLoggedIn, async (req, res) => {
     try {
         const comment = await Comment.findByIdAndDelete(req.params.commentId);
         res.redirect(`/games/${req.params.id}`);
@@ -63,4 +63,16 @@ router.delete("/:commentId", async (req, res) => {
         res.send("ERROR: /commentId DELETE: <br>" + err);
     }
 });
+
+/* --------------------------- ANCHOR IS LOGGED IN -------------------------- */
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    } else {
+        res.redirect("/login");
+    }
+}
+function genreFix(genre) {
+    return genre.toLowerCase().replace(" ", "");
+}
 module.exports = router;

@@ -55,6 +55,7 @@
         </div>
     </div>
 
+    <!-- --------------------------- ANCHOR COMMENTS --------------------------- -->
     <div class="row show_comment-header mt-3">COMMENTS</div>
     <a
         href="/games/<%= game._id %>/comments/new "
@@ -63,7 +64,7 @@
     >
     <% comments.forEach((comment)=>{%>
     <div class="row show_comment-container py-2 border">
-        <div class="col-2 border-end my-auto"><%= comment.user %></div>
+        <div class="col-2 border-end my-auto"><%= comment.user.username %></div>
         <div
             class="
                 col-2
