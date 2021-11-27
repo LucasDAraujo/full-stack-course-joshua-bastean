@@ -57,10 +57,7 @@ try {
     console.log(
         "Could not connect using config. This probably means you are not working locally"
     );
-    mongoose.connect(
-        process.env.DB_CONNECTION_STRING,
-        mongoose.connect(config.database.connection())
-    );
+    mongoose.connect(process.env.DB_CONNECTION_STRING);
 }
 
 //ANCHOR Express config
