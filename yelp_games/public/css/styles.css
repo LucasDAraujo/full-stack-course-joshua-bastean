@@ -8,8 +8,6 @@ a {
     text-decoration: none;
 }
 
-
-
 /* --------------------------------- NAVBAR --------------------------------- */
 .dropdown-menu {
     font-size: 3rem;
@@ -85,13 +83,54 @@ footer {
 input.form-control {
     font-size: 4rem;
 }
-a.btn{
-    font-size:3rem;
+a.btn {
+    font-size: 3rem;
 }
-button.btn{
-    font-size:3rem;
+button.btn {
+    font-size: 3rem;
 }
-/* --------------------------------- QUERIES -------------------------------- */
+textarea.form-control {
+    font-size: 3rem;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                  SHOW PAGE                                 */
+/* -------------------------------------------------------------------------- */
+.show_image-container img {
+    height: 20rem;
+    width: 40rem;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                             SECTION LADING PAGE                             */
+/* -------------------------------------------------------------------------- */
+
+/* ----------------------- ANCHOR EDIT/DELETE BUTTONS ----------------------- */
+.modify-comment i {
+    font-size: 1.8rem;
+}
+/* -------------------------------- ANCHOR CAROUSEL -------------------------------- */
+.carousel-caption p,
+.carousel-caption h5 {
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #00000070;
+}
+.carousel-caption p {
+    font-size: 3rem;
+}
+.carousel-caption h5 {
+    font-size: 4.4rem;
+}
+span.changeSlide {
+    font-size: 5rem;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #00000070;
+}
+/* -------------------------------- !SECTION -------------------------------- */
+
+/* -------------------------------------------------------------------------- */
+/*                               SECTION QUERIES                              */
+/* -------------------------------------------------------------------------- */
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) and (max-width: 767.98px) {
     a.navbar-brand {
@@ -111,6 +150,30 @@ button.btn{
     i.fa-search {
         font-size: 2rem;
     }
+
+    /* ------------------------- ANCHOR COMMENTS CONTAINER ------------------------- */
+    a.add-comment {
+        font-size: 1.5rem;
+    }
+    .show_comment-container .border-end {
+        border: none !important;
+    }
+    .show_comment-container {
+        font-size: 1.5rem;
+    }
+    .show_comment-container .flex-wrap {
+        flex-wrap: nowrap !important;
+    }
+    .show_comment-container .modify-comment {
+        height: 3rem;
+        line-height: 1.5rem;
+    }
+    .show_comment-container .comment-text {
+        text-align: center;
+    }
+
+    /* --------------------------- ANCHOR ADD A COMMENT PAGE --------------------------- */
+
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -137,26 +200,19 @@ button.btn{
         font-size: 1.1rem;
     }
 
-    .dropdown-menu {
+    .dropdown-menu,input.form-control,button.btn,a.btn,textarea.form-control {
         font-size: 1rem;
     }
 
-    input.form-control {
-        font-size: 1rem;
+    /* -------------------------- ANCHOR LADING PAGE CAROUSEL -------------------------- */
+    .carousel-caption p {
+        font-size: 1.7rem;
     }
-    
-    button.btn{
-        font-size:1rem;
+    .carousel-caption h5 {
+        font-size: 2rem;
     }
-    a.btn{
-        font-size:1rem;
+    span.changeSlide {
+        font-size: 3rem;
     }
 }
-
-/* -------------------------------------------------------------------------- */
-/*                                  SHOW PAGE                                 */
-/* -------------------------------------------------------------------------- */
-.show_image-container img {
-    height: 20rem;
-    width: 40rem;
-}
+/* -------------------------------- !SECTION -------------------------------- */

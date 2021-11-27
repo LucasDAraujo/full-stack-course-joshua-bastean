@@ -1,7 +1,59 @@
 <%- include("partials/header.ejs") %>
-<div class="container">
-    <h1>Home page</h1>
-    <a class="btn btn-primary" href="/games">Go to games</a>
+<div class="container-fluid w-100 text-center">
+    <h1>Welcome to Yelp Games</h1>
+
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel ">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="rounded-3" src="https://i.postimg.cc/sgpTbWSC/pexels-francesco-ungaro-1670977-min.jpg" class="d-block w-100" alt="A Space Invaders alien on a wooden wall" />
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Read about games</h5>
+                    <p>A site where posts can be made for any game you want!</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="rounded-3" src="https://i.postimg.cc/g29MMsxK/pexels-pixabay-459762-min.jpg
+                " class="d-block w-100"
+                    alt="PS4 controller on a wood table" />
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Comment your opinions</h5>
+                    <p>
+                        You can make comments for every game, just
+                        register!
+                    </p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="rounded-3" src="https://i.postimg.cc/nc9RYghz/pexels-soumil-kumar-735911-min.jpg" class="d-block w-100" alt="Person gaming on a pc" />
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Rate the games</h5>
+                    <p>
+                        Give them a star rate, it's your opinion!
+                    </p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="prev">
+            <span class="changeSlide fas fa-chevron-left" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="next">
+            <span class="changeSlide fas fa-chevron-right" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <a  class="my-5 btn btn-primary btn-lg" href="/games">Go to games</a>
 </div>
 
 <%- include("partials/footer") %>
