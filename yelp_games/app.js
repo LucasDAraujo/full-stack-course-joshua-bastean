@@ -1,11 +1,19 @@
 /* -------------------------------------------------------------------------- */
-/*                                   IMPORTS                                  */
+/*                               SECTION IMPORTS                              */
 /* -------------------------------------------------------------------------- */
 
-//- CONFIG IMPORT -
-const config = require("./config");
+//- ANCHOR CONFIG IMPORT -
+let config;
+try {
+    config = require("./config");
+} catch (err) {
+    console.log(
+        "Could not import config. This probably means you're not working locally"
+    );
+    console.log(e);
+}
 
-//- NPM IMPORTS -
+//- ANCHOR NPM IMPORTS -
 const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
@@ -16,21 +24,23 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const expressSession = require("express-session");
 
-//- ROUTE IMPORTS -
+//- ANCHOR ROUTE IMPORTS -
 const gameRoutes = require("./routes/games");
 const commentRoutes = require("./routes/comments");
 const mainRoutes = require("./routes/main");
 const authRoutes = require("./routes/auth");
 
-//- MODEL IMPORTS -
+//- ANCHOR MODEL IMPORTS -
 const Game = require("./models/game");
 const Comment = require("./models/comment");
 const User = require("./models/user");
 
+/* -------------------------------- !SECTION -------------------------------- */
+
 /* -------------------------------------------------------------------------- */
 /*                                 DEVELOPMENT                                */
 /* -------------------------------------------------------------------------- */
-//Morgan
+//ANCHOR Morgan
 app.use(morgan("tiny"));
 
 //Seed the DB
@@ -38,54 +48,66 @@ app.use(morgan("tiny"));
 // seed();
 
 /* -------------------------------------------------------------------------- */
-/*                               CONFIGURATIONS                               */
+/*                           SECTION CONFIGURATIONS                           */
 /* -------------------------------------------------------------------------- */
-//connect to DB
-mongoose.connect(config.database.connection());
 
-//Express config
+//ANCHOR MONGOOSE CONFIG
+try {
+    mongoose.connect(config.database.connection());
+} catch (err) {
+    console.log(
+        "Could not connect using config. This probably means you are not working locally"
+    );
+    mongoose.connect(
+        process.env.DB_CONNECTION_STRING,
+        mongoose.connect(config.database.connection())
+    );
+}
+
+//ANCHOR Express config
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
-//Express Session Configuration
+//ANCHOR Express Session Configuration
 app.use(
     expressSession({
-        secret: "aLSDKAhdpoasudhasdasxcosncsad689&W#&@W#2332*-ASD+ASDQWRE5R",
+        secret: process.env.ES_SECRET || config.expressSession.secret,
         resave: "false",
         saveUninitialized: false,
     })
 );
 
-//Url encode config
+//ANCHOR Url encode config
 app.use(
     express.urlencoded({
         extended: true,
     })
 );
 
-//Method override config
+//ANCHOR Method override config
 app.use(methodOverride("_method"));
 
-//Passport configuration
+//ANCHOR Passport configuration
 app.use(passport.initialize());
 app.use(passport.session()); //Allows persistent sessions
-passport.serializeUser(User.serializeUser()); //Tells us what data should be stored in sesion
+passport.serializeUser(User.serializeUser()); //Tells us what data should be stored in session
 passport.deserializeUser(User.deserializeUser()); // Get the user data from th e stored session
 passport.use(new LocalStrategy(User.authenticate())); // Use the local strategy
 
-//Current user middleware config
+//ANCHOR Current user middleware config
 app.use((req, res, next) => {
     res.locals.user = req.user;
     next();
 });
 
-//Route config
+//ANCHOR Route config
 app.use("/games", gameRoutes);
 app.use("/games/:id/comments", commentRoutes);
 app.use("/", authRoutes);
 app.use("/", mainRoutes);
+/* -------------------------------- !SECTION -------------------------------- */
 
-/* -------------------------------------------------------------------------- */
-/*                                   LISTEN                                   */
-/* -------------------------------------------------------------------------- */
-app.listen(port, () => console.log(`Yelp_games is working on port ${port}`));
+/* ------------------------------ ANCHOR LISTEN ----------------------------- */
+app.listen(process.env.PORT || port, () =>
+    console.log(`Yelp_games is working on port ${port}`)
+);
