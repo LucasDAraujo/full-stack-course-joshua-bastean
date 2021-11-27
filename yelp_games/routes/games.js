@@ -4,6 +4,8 @@ const Game = require("../models/game");
 const Comment = require("../models/comment");
 const isLoggedIn = require("../utils/isLoggedIn");
 const checkGameOwner = require("../utils/checkGameOwner");
+const convertUserSearch = require("../utils/convertUserSearch");
+const validGenres = require("../utils/validGenres");
 /* ------------------------------ ANCHOR INDEX ------------------------------ */
 router.get("/", async (req, res) => {
     console.log(req.user);
@@ -61,11 +63,20 @@ router.get("/search", async (req, res) => {
 });
 
 /* ------------------------------ ANCHOR GENRE ------------------------------ */
-router.get("/genre/:genreName", async (req, res) => {
+router.get("/genre/:genre", async (req, res) => {
+    
+
+    const userSearch = req.params.genre.toLowerCase().replace(" ", "");
+
     //Check if the given genre is valid
-    const validGenres = [];
-    //If yes, continued
-    //If no, send an error
+    if (validGenres.includes(userSearch)) {
+        const games = await Game.find({
+            genre: convertUserSearch(userSearch),
+        }).exec();
+        res.render("games", { games });
+    } else {
+        res.send("Please enter a valid genre");
+    }
 });
 
 /* ------------------------------- ANCHOR SHOW ------------------------------ */
@@ -119,8 +130,5 @@ router.delete("/:id", checkGameOwner, async (req, res) => {
         res.send(`ERROR on /games/${req.params.id} DELETE`);
     }
 });
-
-
-
 
 module.exports = router;
