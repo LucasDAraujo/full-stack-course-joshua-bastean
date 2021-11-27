@@ -3,12 +3,12 @@ const router = express.Router();
 const User = require("../models/user");
 const passport = require("passport");
 
-//Sign Up - New
+//ANCHOR Sign Up - New
 router.get("/signup", (req, res) => {
     res.render("signup");
 });
 
-//Sign Up - Create
+//ANCHOR Sign Up - Create
 router.post("/signup", async (req, res) => {
     try {
         const newUser = await User.register(
@@ -29,12 +29,12 @@ router.post("/signup", async (req, res) => {
     }
 });
 
-//Login - Show form
+//ANCHOR Login - Show form
 router.get("/login", (req, res) => {
-    res.render("login");
+    res.render("login", { flashMessage: req.flash("error") });
 });
 
-//Login
+//ANCHOR Login
 router.post(
     "/login",
     passport.authenticate("local", {
@@ -43,12 +43,12 @@ router.post(
     })
 );
 
-//Logout
+//ANCHOR Logout
 router.get("/logout", (req, res) => {
     req.logout();
     res.redirect("/games");
 });
 
-//Logout
+//ANCHOR Logout
 
 module.exports = router;
