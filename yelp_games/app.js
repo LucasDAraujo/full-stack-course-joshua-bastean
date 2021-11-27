@@ -97,7 +97,8 @@ passport.use(new LocalStrategy(User.authenticate())); // Use the local strategy
 //ANCHOR State config
 app.use((req, res, next) => {
     res.locals.user = req.user;
-    res.locals.message = req.flash();
+    res.locals.errorMessage = req.flash("error");
+    res.locals.successMessage = req.flash("success");
     next();
 });
 
