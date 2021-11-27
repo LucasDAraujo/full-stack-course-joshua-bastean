@@ -31,7 +31,7 @@ router.post("/signup", async (req, res) => {
 
 //ANCHOR Login - Show form
 router.get("/login", (req, res) => {
-    res.render("login", { message: req.flash("error") });
+    res.render("login");
 });
 
 //ANCHOR Login
