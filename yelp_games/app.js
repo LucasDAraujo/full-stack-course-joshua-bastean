@@ -94,9 +94,10 @@ passport.serializeUser(User.serializeUser()); //Tells us what data should be sto
 passport.deserializeUser(User.deserializeUser()); // Get the user data from th e stored session
 passport.use(new LocalStrategy(User.authenticate())); // Use the local strategy
 
-//ANCHOR Current user middleware config
+//ANCHOR State config
 app.use((req, res, next) => {
     res.locals.user = req.user;
+    res.locals.message = req.flash();
     next();
 });
 
