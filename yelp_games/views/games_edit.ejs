@@ -17,15 +17,15 @@
             <label for="genre">Game genre</label>
             <select name="genre" id="genre" class="form-control">
                 <option disabled selected >-- Choose below --</option>
-                <option <%=  game.genre === 'action' ? 'selected' : '' %> >Action</option>
-                <option  <%= game.genre === 'fighting' ? 'selected' : '' %>    >Fighting</option>
-                <option  <%= game.genre === 'stealth' ? 'selected' : '' %>  >Stealth</option>
-                <option  <%= game.genre === 'survivalhorror' ? 'selected' : '' %>  >Survival horror</option>
-                <option  <%= game.genre === 'adventure' ? 'selected' : '' %>  >Adventure</option>
-                <option  <%= game.genre === 'rpg' ? 'selected' : '' %>  >RPG</option>
-                <option  <%= game.genre === 'battleroyale' ? 'selected' : '' %>  >Battle Royale</option>
-                <option  <%= game.genre === 'simulation' ? 'selected' : '' %>  >Simulation</option>
-                <option  <%= game.genre === 'racing' ? 'selected' : '' %>  >Racing</option>
+                <option value="0" <%=  game.genre === '0' ? 'selected' : '' %> >Action</option>
+                <option value="1" <%= game.genre === '1' ? 'selected' : '' %>    >Fighting</option>
+                <option value="2" <%= game.genre === '2' ? 'selected' : '' %>  >Stealth</option>
+                <option value="3" <%= game.genre === '3' ? 'selected' : '' %>  >Survival horror</option>
+                <option value="4" <%= game.genre === '4' ? 'selected' : '' %>  >Adventure</option>
+                <option value="5" <%= game.genre === '5' ? 'selected' : '' %>  >RPG</option>
+                <option value="6" <%= game.genre === '6' ? 'selected' : '' %>  >Battle Royale</option>
+                <option value="7" <%= game.genre === '7' ? 'selected' : '' %>  >Simulation</option>
+                <option value="8" <%= game.genre === '8' ? 'selected' : '' %>  >Racing</option>
             </select>
         </div>
 

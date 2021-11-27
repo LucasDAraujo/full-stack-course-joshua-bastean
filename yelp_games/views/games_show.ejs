@@ -24,7 +24,17 @@
                     </tr>
                     <tr>
                         <th scope="row">Genre</th>
-                        <td><%= game.genre %></td>
+                        <td>
+                            <%=game.genre === "0" ? "Action":""%>
+                            <%=game.genre === "1" ? "Fighting":""%>
+                            <%=game.genre === "2" ? "Stealth":""%>
+                            <%=game.genre === "3" ? "Survival horror":""%>
+                            <%=game.genre === "4" ? "Adventure":""%>
+                            <%=game.genre === "5" ? "RPG":""%>
+                            <%=game.genre === "6" ? "Battle Royale":""%>
+                            <%=game.genre === "7" ? "Simulation":""%>
+                            <%=game.genre === "8" ? "Racing":""%>
+                        </td>
                     </tr>
                     <tr>
                         <th scope="row">Date</th>

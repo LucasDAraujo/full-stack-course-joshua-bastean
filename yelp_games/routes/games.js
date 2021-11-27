@@ -61,12 +61,12 @@ router.get("/search", async (req, res) => {
 });
 
 /* ------------------------------ ANCHOR GENRE ------------------------------ */
-router.get("/genre/:genreName",async(req,res)=>{
+router.get("/genre/:genreName", async (req, res) => {
     //Check if the given genre is valid
     const validGenres = [];
     //If yes, continued
     //If no, send an error
-})
+});
 
 /* ------------------------------- ANCHOR SHOW ------------------------------ */
 router.get("/:id", async (req, res) => {
@@ -84,7 +84,6 @@ router.get("/:id", async (req, res) => {
 router.get("/:id/edit", checkGameOwner, async (req, res) => {
     //If owner, then render the form to edit
     const game = await Game.findById(req.params.id).exec();
-    game.genre = genreFix(game.genre);
     res.render("games_edit", { game });
 });
 
@@ -121,9 +120,7 @@ router.delete("/:id", checkGameOwner, async (req, res) => {
     }
 });
 
-/* ---------------------------- ANCHOR GENRE FIX ---------------------------- */
-function genreFix(genre) {
-    return genre.toLowerCase().replace(" ", "");
-}
+
+
 
 module.exports = router;
