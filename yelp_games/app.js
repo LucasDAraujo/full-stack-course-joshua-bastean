@@ -3,14 +3,13 @@
 /* -------------------------------------------------------------------------- */
 
 //- ANCHOR CONFIG IMPORT -
-let config;
 try {
-    config = require("./config");
+    var config = require("./config");
 } catch (err) {
     console.log(
         "Could not import config. This probably means you're not working locally"
     );
-    console.log(e);
+    console.log(err);
 }
 
 //- ANCHOR NPM IMPORTS -
