@@ -94,12 +94,36 @@ textarea.form-control {
 }
 
 /* -------------------------------------------------------------------------- */
-/*                                  SHOW PAGE                                 */
+/*                              SECTION SHOW PAGE                             */
 /* -------------------------------------------------------------------------- */
 .show_image-container img {
     height: 20rem;
     width: 40rem;
 }
+
+/* ------------------------- ANCHOR COMMENTS CONTAINER ------------------------- */
+a.add-comment {
+    font-size: 3.5rem;
+}
+.username, .show_comment-container .comment-text{
+    font-size: 2.5rem;
+}
+.show_comment-container .border-end {
+    border: none !important;
+}
+
+.show_comment-container .flex-wrap {
+    flex-wrap: nowrap !important;
+}
+.show_comment-container .modify-comment {
+    font-size: 4rem;
+    line-height: 1.5rem;
+}
+.show_comment-container .comment-text {
+    text-align: center;
+}
+
+/* -------------------------------- !SECTION -------------------------------- */
 
 /* -------------------------------------------------------------------------- */
 /*                             SECTION LADING PAGE                             */
@@ -126,6 +150,7 @@ span.changeSlide {
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #00000070;
 }
+
 /* -------------------------------- !SECTION -------------------------------- */
 
 /* -------------------------------------------------------------------------- */
@@ -151,29 +176,7 @@ span.changeSlide {
         font-size: 2rem;
     }
 
-    /* ------------------------- ANCHOR COMMENTS CONTAINER ------------------------- */
-    a.add-comment {
-        font-size: 1.5rem;
-    }
-    .show_comment-container .border-end {
-        border: none !important;
-    }
-    .show_comment-container {
-        font-size: 1.5rem;
-    }
-    .show_comment-container .flex-wrap {
-        flex-wrap: nowrap !important;
-    }
-    .show_comment-container .modify-comment {
-        height: 3rem;
-        line-height: 1.5rem;
-    }
-    .show_comment-container .comment-text {
-        text-align: center;
-    }
-
     /* --------------------------- ANCHOR ADD A COMMENT PAGE --------------------------- */
-
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -200,7 +203,11 @@ span.changeSlide {
         font-size: 1.1rem;
     }
 
-    .dropdown-menu,input.form-control,button.btn,a.btn,textarea.form-control {
+    .dropdown-menu,
+    input.form-control,
+    button.btn,
+    a.btn,
+    textarea.form-control {
         font-size: 1rem;
     }
 
