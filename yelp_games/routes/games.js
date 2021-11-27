@@ -60,6 +60,14 @@ router.get("/search", async (req, res) => {
     }
 });
 
+/* ------------------------------ ANCHOR GENRE ------------------------------ */
+router.get("/genre/:genreName",async(req,res)=>{
+    //Check if the given genre is valid
+    const validGenres = [];
+    //If yes, continued
+    //If no, send an error
+})
+
 /* ------------------------------- ANCHOR SHOW ------------------------------ */
 router.get("/:id", async (req, res) => {
     const id = req.params.id;
