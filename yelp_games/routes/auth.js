@@ -18,7 +18,7 @@ router.post("/signup", async (req, res) => {
             }),
             req.body.password
         );
-        console.log(newUser);
+        req.flash("success", `Signed you up as ${newUser.username}`);
 
         passport.authenticate("local")(req, res, () => {
             res.redirect("/games");
@@ -40,12 +40,15 @@ router.post(
     passport.authenticate("local", {
         successRedirect: "/games",
         failureRedirect: "/login",
+        failureFlash: true,
+        successFlash: "Logged in successfully!",
     })
 );
 
 //ANCHOR Logout
 router.get("/logout", (req, res) => {
     req.logout();
+    req.flash("success","Logged you out!")
     res.redirect("/games");
 });
 
