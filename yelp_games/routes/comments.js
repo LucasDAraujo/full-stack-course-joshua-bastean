@@ -20,19 +20,25 @@ router.post("/", isLoggedIn, async (req, res) => {
             text: req.body.text,
             gameId: req.body.gameId,
         });
-        console.log(newComment);
+        req.flash("success", "Comment created successfully!");
         res.redirect(`/games/${req.body.gameId}`);
     } catch (err) {
         console.log(err);
-        res.send(`ERROR ON: /games/${req.body.gameId} POST comments`);
+        req.flash("error", "Error creating comment");
+        res.redirect("/games");
     }
 });
 
 //ANCHOR EDIT - Show the edit form
 router.get("/:commentId/edit", checkCommentOwner, async (req, res) => {
-    const game = await Game.findById(req.params.id).exec();
-    const comment = await Comment.findById(req.params.commentId).exec();
-    res.render("comments_edit", { game, comment });
+    try {
+        const game = await Game.findById(req.params.id).exec();
+        const comment = await Comment.findById(req.params.commentId).exec();
+        res.render("comments_edit", { game, comment });
+    } catch (err) {
+        console.log(err);
+        res.redirect("/games");
+    }
 });
 
 //ANCHOR UPDATE Comment - actually update the db
@@ -43,10 +49,12 @@ router.put("/:commentId", checkCommentOwner, async (req, res) => {
             { text: req.body.text },
             { new: true }
         );
+        req.flash("success", "Comment edited successfully!");
         res.redirect(`/games/${req.params.id}`);
     } catch (err) {
         console.log(err);
-        res.send("ERROR ON: /:commentId PUT");
+        req.flash("error", "Error editing comment");
+        res.redirect("/games");
     }
 });
 
@@ -54,10 +62,12 @@ router.put("/:commentId", checkCommentOwner, async (req, res) => {
 router.delete("/:commentId", checkCommentOwner, async (req, res) => {
     try {
         const comment = await Comment.findByIdAndDelete(req.params.commentId);
+        req.flash("success", "Comment deleted!");
         res.redirect(`/games/${req.params.id}`);
     } catch (err) {
         console.log("ERROR:" + err);
-        res.send("ERROR: /commentId DELETE: <br>" + err);
+        req.flash("error", "Error deleting comment")
+        res.redirect("/games");
     }
 });
 

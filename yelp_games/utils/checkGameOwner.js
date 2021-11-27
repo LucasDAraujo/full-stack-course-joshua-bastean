@@ -10,10 +10,12 @@ const checkGameOwner = async (req, res, next) => {
             next();
         } else {
             //If not, redirect back to the show page
+            req.flash("danger", "You don't have permission to do that");
             res.redirect("back");
         }
     } else {
         //If not logged in, redirect to /login
+        req.flash("danger", "You must be logged in to do that");
         res.redirect("/login");
     }
 };

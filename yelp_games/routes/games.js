@@ -34,11 +34,11 @@ router.post("/", isLoggedIn, async (req, res) => {
     //POST it on the Database
     try {
         const game = await Game.create(newGame);
-        console.log(game);
+        req.flash("success", "Your game has been created!");
         res.redirect(`/games/${game._id}`);
     } catch (err) {
-        console.log(err);
-        res.send(`ERROR ON /games POST:${err}`);
+        req.flash("error", "Cannot create the game");
+        res.redirect("/games");
     }
 });
 
@@ -64,8 +64,6 @@ router.get("/search", async (req, res) => {
 
 /* ------------------------------ ANCHOR GENRE ------------------------------ */
 router.get("/genre/:genre", async (req, res) => {
-    
-
     const userSearch = req.params.genre.toLowerCase().replace(" ", "");
 
     //Check if the given genre is valid
@@ -112,9 +110,11 @@ router.put("/:id", checkGameOwner, async (req, res) => {
             new: true,
         }).exec();
         console.log(updatedGame);
+        req.flash('success',"Game updated!");
         res.redirect(`/games/${id}`);
     } catch (err) {
         console.log(err);
+        req.flash('error',"Error updating game");
         res.send(`ERROR on /games/${id}/edit UPDATE`);
     }
 });
@@ -125,9 +125,11 @@ router.delete("/:id", checkGameOwner, async (req, res) => {
     try {
         deletedGame = await Game.findByIdAndDelete(req.params.id).exec();
         console.log(`Deleted:${deletedGame}`);
+        req.flash("success", "Game deleted!")
         res.redirect("/games");
     } catch (err) {
-        res.send(`ERROR on /games/${req.params.id} DELETE`);
+        req.flash("error","Error deleting game")
+        res.redirect("back");
     }
 });
 
