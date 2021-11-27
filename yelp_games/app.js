@@ -22,6 +22,7 @@ const morgan = require("morgan");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const expressSession = require("express-session");
+const flash = require("connect-flash");
 
 //- ANCHOR ROUTE IMPORTS -
 const gameRoutes = require("./routes/games");
@@ -82,6 +83,9 @@ app.use(
 
 //ANCHOR Method override config
 app.use(methodOverride("_method"));
+
+//ANCHOR Connect Flash
+app.use(flash());
 
 //ANCHOR Passport configuration
 app.use(passport.initialize());
