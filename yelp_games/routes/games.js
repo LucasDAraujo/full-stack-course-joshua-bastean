@@ -27,6 +27,8 @@ router.post("/", isLoggedIn, async (req, res) => {
     const newGame = {
         ...req.body,
         owner: { id: req.user._id, username: req.user.username },
+        upvotes: [req.user.username],
+        downvotes:[],
     };
 
     console.log(newGame);

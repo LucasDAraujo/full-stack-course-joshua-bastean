@@ -14,9 +14,11 @@ const gameSchema = new mongoose.Schema({
         id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
-        }, 
+        },
         username: String,
     },
+    upvotes: [String],
+    downvotes: [String],
 });
 
 //Compiling the game schema into a more advanced constant with CAPITAL C using  mongoose.model
