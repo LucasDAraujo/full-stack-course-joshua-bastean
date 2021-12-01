@@ -103,9 +103,10 @@ textarea.form-control {
 
 /* ------------------------- ANCHOR COMMENTS CONTAINER ------------------------- */
 a.add-comment {
-    font-size: 3.5rem;
+    font-size: 1.5rem;
 }
-.username, .show_comment-container .comment-text{
+.username,
+.show_comment-container .comment-text {
     font-size: 2.5rem;
 }
 .show_comment-container .border-end {
@@ -220,6 +221,18 @@ span.changeSlide {
     }
     span.changeSlide {
         font-size: 3rem;
+    }
+
+    /* ------------------------- ANCHOR COMMENTS CONTAINER ------------------------- */
+    a.add-comment {
+        font-size: 1.5rem;
+    }
+    .username,
+    .show_comment-container .comment-text {
+        font-size: 1.2rem;
+    }
+    .show_comment-container .modify-comment {
+        font-size: 1.6rem;
     }
 }
 /* -------------------------------- !SECTION -------------------------------- */

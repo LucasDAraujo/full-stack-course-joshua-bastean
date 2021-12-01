@@ -6,45 +6,57 @@
             <img src="<%= game.image %> " alt="Picture from the game <%= game.title %>" srcset="" />
         </div>
         <div class="col-12 col-xl-6 show_details-container">
-            <h1><%= game.title %></h1>
-            <p><%= game.description %></p>
+            <h1>
+                <%= game.title %>
+            </h1>
+            <p>
+                <%= game.description %>
+            </p>
             <table class="table">
                 <tbody>
                     <tr>
                         <th scope="row">Added by</th>
-                        <td><%= game.owner.username %></td>
+                        <td>
+                            <%= game.owner.username %>
+                        </td>
                     </tr>
                     <tr>
                         <th scope="row">Developer</th>
-                        <td><%= game.developer %></td>
+                        <td>
+                            <%= game.developer %>
+                        </td>
                     </tr>
                     <tr>
                         <th scope="row">Publisher</th>
-                        <td><%= game.publisher %></td>
+                        <td>
+                            <%= game.publisher %>
+                        </td>
                     </tr>
                     <tr>
                         <th scope="row">Genre</th>
                         <td>
-                            <%=game.genre === "0" ? "Action":""%>
-                            <%=game.genre === "1" ? "Fighting":""%>
-                            <%=game.genre === "2" ? "Stealth":""%>
-                            <%=game.genre === "3" ? "Survival horror":""%>
-                            <%=game.genre === "4" ? "Adventure":""%>
-                            <%=game.genre === "5" ? "RPG":""%>
-                            <%=game.genre === "6" ? "Battle Royale":""%>
-                            <%=game.genre === "7" ? "Simulation":""%>
-                            <%=game.genre === "8" ? "Racing":""%>
+                            <%=game.genre==="0" ? "Action" :""%>
+                            <%=game.genre==="1" ? "Fighting" :""%>
+                            <%=game.genre==="2" ? "Stealth" :""%>
+                            <%=game.genre==="3" ? "Survival horror" :""%>
+                            <%=game.genre==="4" ? "Adventure" :""%>
+                            <%=game.genre==="5" ? "RPG" :""%>
+                            <%=game.genre==="6" ? "Battle Royale" :""%>
+                            <%=game.genre==="7" ? "Simulation" :""%>
+                            <%=game.genre==="8" ? "Racing" :""%>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">Date</th>
-                        <td><%= game.date.toISOString().split("T")[0] %></td>
+                        <td>
+                            <%= game.date.toISOString().split("T")[0] %>
+                        </td>
                     </tr>
                 </tbody>
             </table>
 
             <!-- --------------------------- ANCHOR BUTTONS ---------------------------- -->
-            <% if (user && user.username ===game.owner.username){%>
+            <% if (user && user.username===game.owner.username){%>
             <div class="d-grid gap-2 my-2">
                 <a href="/games/<%= game._id %>/edit" class="btn btn-outline-primary" type="button">Edit</a>
             </div>
@@ -57,20 +69,32 @@
                 </div>
             </form>
             <%}%>
+            </div>
         </div>
-    </div>
 
-    <!-- --------------------------- ANCHOR COMMENTS --------------------------- -->
+        <!-- --------------------------- ANCHOR COMMENTS --------------------------- -->
 
-    <div class="row show_comment-header m-5 m-md-0 mt-md-3">COMMENTS</div>
-    <a
-        href="/games/<%= game._id %>/comments/new "
-            class="btn btn-primary btn-lg mb-4 mt-2 add-comment"
-            >Add comment</a>
-            <% comments.forEach((comment)=>{%>
-            <div class="row show_comment-container py-2 w-100 border">
-                <div class="col-2 col-md-2 border-end my-auto ml-5 username"><%= comment.user.username %></div>
-                <div class="
+        <div class="row">
+
+            <a href="/games/<%=game._id %>" class="col-3"></a>
+            <div class="col-2">
+                <button id="upvote_btn" class="btn btn-lg btn-outline-success mt-3">
+                    +
+                </button>
+                <span id="score" class="mx-2">10</span>
+                <button id="downvote_btn" class="btn btn-lg btn-outline-danger mt-3">
+                    -
+                </button>
+            </div>
+        </div>
+        <a href="/games/<%= game._id %>/comments/new " class="btn btn-primary btn-lg mb-4 mt-2 add-comment">Add
+            comment</a>
+        <% comments.forEach((comment)=>{%>
+        <div class="row show_comment-container py-2 w-100 border">
+            <div class="col-2 col-md-2 border-end my-auto ml-5 username">
+                <%= comment.user.username %>
+            </div>
+            <div class="
                 col-6
                 col-md-2
                 border-end
@@ -80,27 +104,28 @@
                 justify-content-center
                 align-items-center
             ">
-                    <!-- ----------------------- ANCHOR COMMENTS BUTTONS ----------------------- -->
+                <!-- ----------------------- ANCHOR COMMENTS BUTTONS ----------------------- -->
 
-                    <% if (user && user.username ===comment.user.username) {%>
-                        
-                    <a href="/games/<%= game._id %>/comments/<%= comment._id %>/edit"
-                        class="modify-comment btn btn-primary my-1 mx-1">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                    <form class="  text-center" action="/games/<%= game._id%>/comments/<%=comment._id%>?_method=DELETE"
-                        method="POST">
-                        <button class="modify-comment btn btn-sm btn-danger mx-1 ">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </form>
-                    <%}%>
-        </div>
-        <div class="col-4 col-md-8 my-auto  comment-text"><%= comment.text %>
+                <% if (user && user.username===comment.user.username) {%>
+
+                <a href="/games/<%= game._id %>/comments/<%= comment._id %>/edit"
+                    class="modify-comment btn btn-primary my-1 mx-1">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <form class="  text-center" action="/games/<%= game._id%>/comments/<%=comment._id%>?_method=DELETE"
+                    method="POST">
+                    <button class="modify-comment btn btn-sm btn-danger mx-1 ">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </form>
+                <%}%>
                 </div>
+                <div class="col-4 col-md-8 my-auto  comment-text">
+                    <%= comment.text %>
             </div>
-            <%}) %>
-            <div class="py-5"></div>
         </div>
+        <%}) %>
+        <div class="py-5"></div>
+    </div>
 
-        <%- include("./partials/footer.ejs") %>
+    <%- include("./partials/footer.ejs") %>

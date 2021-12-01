@@ -28,7 +28,7 @@ router.post("/", isLoggedIn, async (req, res) => {
         ...req.body,
         owner: { id: req.user._id, username: req.user.username },
         upvotes: [req.user.username],
-        downvotes:[],
+        downvotes: [],
     };
 
     console.log(newGame);
@@ -79,6 +79,12 @@ router.get("/genre/:genre", async (req, res) => {
     }
 });
 
+router.post("/vote", isLoggedIn, (req, res) => {
+    res.json({
+        message: "voted!",
+    });
+});
+
 /* ------------------------------- ANCHOR SHOW ------------------------------ */
 router.get("/:id", async (req, res) => {
     const id = req.params.id;
@@ -112,11 +118,11 @@ router.put("/:id", checkGameOwner, async (req, res) => {
             new: true,
         }).exec();
         console.log(updatedGame);
-        req.flash('success',"Game updated!");
+        req.flash("success", "Game updated!");
         res.redirect(`/games/${id}`);
     } catch (err) {
         console.log(err);
-        req.flash('error',"Error updating game");
+        req.flash("error", "Error updating game");
         res.send(`ERROR on /games/${id}/edit UPDATE`);
     }
 });
@@ -127,10 +133,10 @@ router.delete("/:id", checkGameOwner, async (req, res) => {
     try {
         deletedGame = await Game.findByIdAndDelete(req.params.id).exec();
         console.log(`Deleted:${deletedGame}`);
-        req.flash("success", "Game deleted!")
+        req.flash("success", "Game deleted!");
         res.redirect("/games");
     } catch (err) {
-        req.flash("error","Error deleting game")
+        req.flash("error", "Error deleting game");
         res.redirect("back");
     }
 });
