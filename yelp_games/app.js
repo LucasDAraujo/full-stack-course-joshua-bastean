@@ -18,7 +18,7 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const methodOverride = require("method-override");
-const morgan = require("morgan");
+// const morgan = require("morgan");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const expressSession = require("express-session");
@@ -41,7 +41,7 @@ const User = require("./models/user");
 /*                                 DEVELOPMENT                                */
 /* -------------------------------------------------------------------------- */
 //ANCHOR Morgan
-app.use(morgan("tiny"));
+// app.use(morgan("tiny"));
 
 //Seed the DB
 // const seed = require("./utils/seed");
@@ -64,6 +64,11 @@ try {
 //ANCHOR Express config
 app.set("view engine", "ejs");
 app.use(express.static("public"));
+app.use(
+    express.json({
+        type: ["application/json", "text/plain"],
+    })
+);
 
 //ANCHOR Express Session Configuration
 app.use(
