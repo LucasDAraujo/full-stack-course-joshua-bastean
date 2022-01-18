@@ -75,18 +75,25 @@
         <!-- --------------------------- ANCHOR COMMENTS --------------------------- -->
 
         <div class="row">
+            <% if (user){%>
 
             <a href="/games/<%=game._id %>" class="col-3"></a>
             <div class="col-2">
                 <button id="upvote_btn" class="btn btn-lg btn-outline-success mt-3">
                     +
                 </button>
+                <%} %>
+
                 <span id="score" class="mx-2">10</span>
+
+                <% if (user){%>
                 <button id="downvote_btn" class="btn btn-lg btn-outline-danger mt-3">
                     -
                 </button>
+                <%} %>
             </div>
         </div>
+
         <a href="/games/<%= game._id %>/comments/new " class="btn btn-primary btn-lg mb-4 mt-2 add-comment">Add
             comment</a>
         <% comments.forEach((comment)=>{%>
@@ -127,5 +134,5 @@
         <%}) %>
         <div class="py-5"></div>
     </div>
- <script src="/js/games_show.js"></script>
+    <script src="/js/games_show.js"></script>
     <%- include("./partials/footer.ejs") %>
