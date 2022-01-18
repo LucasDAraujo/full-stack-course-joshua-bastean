@@ -78,7 +78,7 @@ router.get("/genre/:genre", async (req, res) => {
         res.send("Please enter a valid genre");
     }
 });
-
+/* ---------------------------- ANCHOR VOTE ROUTE --------------------------- */
 router.post("/vote", isLoggedIn, (req, res) => {
     res.json({
         message: "voted!",
