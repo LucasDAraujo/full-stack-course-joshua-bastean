@@ -79,11 +79,12 @@ router.get("/genre/:genre", async (req, res) => {
     }
 });
 /* ---------------------------- ANCHOR VOTE ROUTE --------------------------- */
-router.post("/vote", isLoggedIn, (req, res) => {
-    console.log(req.body)
-    res.json({
-        message: "voted!",
-    });
+router.post("/vote", isLoggedIn, async (req, res) => {
+    console.log(req.body);
+    const game = await Game.findById(req.body.gameId);
+    console.log(game);
+
+    res.json(game);
 });
 
 /* ------------------------------- ANCHOR SHOW ------------------------------ */
