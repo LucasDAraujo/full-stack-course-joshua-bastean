@@ -2,7 +2,7 @@
 
 const upvoteBtn = document.getElementById("upvote_btn");
 const downvoteBtn = document.getElementById("downvote_btn");
-
+const score = document.getElementById("score");
 /* ------------------------- ANCHOR HELPER FUNCTIONS ------------------------ */
 const sendVote = async (voteType) => {
     //Build fetch options
@@ -34,10 +34,36 @@ const sendVote = async (voteType) => {
         })
         .then((res) => {
             console.log(res);
+            handleVote(res.score, res.code);
         })
         .catch((err) => {
             console.log(err);
         });
+};
+
+const handleVote = (newScore, code) => {
+    //Update the score
+    score.innerText = newScore;
+
+    //Update button colors
+    if (code === 0) {
+        upvoteBtn.classList.remove("btn-success");
+        upvoteBtn.classList.add("btn-outline-success");
+        downvoteBtn.classList.remove("btn-danger");
+        downvoteBtn.classList.add("btn-outline-danger");
+    } else if (code === 1) {
+        upvoteBtn.classList.remove("btn-outline-success");
+        upvoteBtn.classList.add("btn-success");
+        downvoteBtn.classList.remove("btn-danger");
+        downvoteBtn.classList.add("btn-outline-danger");
+    } else if (code === -1) {
+        upvoteBtn.classList.remove("btn-success");
+        upvoteBtn.classList.add("btn-outline-success");
+        downvoteBtn.classList.remove("btn-outline-danger");
+        downvoteBtn.classList.add("btn-danger");
+    } else {
+        console.log("error in handle vote");
+    }
 };
 
 /* ----------------------- ANCHOR ADD EVENT LISTENERS ----------------------- */
