@@ -82,9 +82,62 @@ router.get("/genre/:genre", async (req, res) => {
 router.post("/vote", isLoggedIn, async (req, res) => {
     console.log(req.body);
     const game = await Game.findById(req.body.gameId);
-    console.log(game);
+    const alreadyUpvoted = game.upvotes.indexOf(req.user.username); //Will be -1 if not found
+    const alreadyDownvoted = game.downvotes.indexOf(req.user.username); //Will be -1 if not found
 
-    res.json(game);
+    let response = {};
+    //Voting logic
+    if (alreadyUpvoted === -1 && alreadyDownvoted === -1) {
+        //Has not voted
+        if (req.body.voteType === "up") {
+            //Upvoting
+            game.upvotes.push(req.user.username);
+            game.save();
+            response.message == "Upvote tallied!";
+        } else if (req.body.voteType === "down") {
+            //Downvoting
+            game.downvotes.push(req.user.username);
+            game.save();
+            response.message == "Downvote tallied!";
+        } else {
+            //Error
+            response.message == "Error 1";
+        }
+    } else if (alreadyUpvoted >= 0) {
+        //Already upvoted
+        if (req.body.voteType === "up") {
+            game.upvotes.splice(alreadyUpvoted, 1);
+            game.save();
+            response.message == "upvote removed";
+        } else if (req.body.voteType === "down") {
+            game.upvotes.splice(alreadyUpvoted, 1);
+            game.downvotes.push(req.user.username);
+            game.save();
+            response.message == "Change to downvote";
+        } else {
+            //Error
+            response.message == "Error 2";
+        }
+    } else if (alreadyDownvoted >= 0) {
+        //Already downvoted
+        if (req.body.voteType === "up") {
+            game.downvotes.splice(alreadyDownvoted, 1);
+            game.upvotes.push(req.user.username);
+            game.save();
+            response.message == "Changed to upvote";
+        } else if (req.body.voteType === "down") {
+            game.downvotes.splice(alreadyDownvoted, 1);
+            game.save();
+            response.message == "Removed downvote";
+        } else {
+            //Error
+            response.message == "Error 3";
+        }
+    } else {
+        //Error
+        response.message == "Error 4";
+    }
+    res.json(response);
 });
 
 /* ------------------------------- ANCHOR SHOW ------------------------------ */
